@@ -937,11 +937,11 @@
 /* Big intro statement that "fills in" as you scroll — the top part of
    the text is full ink while the rest stays dim, driven by --fill */
 .about-intro {
-  margin: 0 0 3.5rem;
-  max-width: 24em;
-  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
-  line-height: 1.35;
-  letter-spacing: -0.03em;
+  margin: 0 0 3rem;
+  max-width: 58ch;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
   font-weight: 400;
   background-image: linear-gradient(
     to bottom,
@@ -969,17 +969,27 @@
   border-top: 1px dashed var(--border);
 }
 
+.xp-item {
+  border-bottom: 1px dashed var(--border);
+}
+
 .xp-row {
   display: grid;
   grid-template-columns: 1fr 1.4fr auto;
   align-items: baseline;
   gap: 0.25rem 1.5rem;
   padding: 1rem 0.25rem;
-  border-bottom: 1px dashed var(--border);
+  cursor: pointer;
+  list-style: none;
   transition: background 0.2s ease;
 }
 
-.xp-row:hover {
+.xp-row::-webkit-details-marker {
+  display: none;
+}
+
+.xp-row:hover,
+.xp-item[open] .xp-row {
   background: var(--surface);
 }
 
@@ -993,10 +1003,73 @@
 }
 
 .xp-period {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--muted);
   white-space: nowrap;
+}
+
+/* Plus / minus toggle on the experience rows */
+.xp-plus {
+  position: relative;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  color: var(--ink);
+}
+
+.xp-plus::before,
+.xp-plus::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  transition: transform 0.25s ease;
+}
+
+.xp-plus::before {
+  left: 50%;
+  top: 0;
+  width: 1.5px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.xp-plus::after {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+
+.xp-item[open] .xp-plus::before {
+  transform: translateX(-50%) rotate(90deg);
+}
+
+/* The bullets that open under each role */
+.xp-details {
+  display: grid;
+  gap: 0.5rem;
+  max-width: 72ch;
+  padding: 0 0.25rem 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.xp-details li {
+  position: relative;
+  padding-left: 1.3rem;
+}
+
+.xp-details li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  opacity: 0.4;
 }
 
 /* Service plans */

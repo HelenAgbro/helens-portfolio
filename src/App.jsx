@@ -91,54 +91,63 @@ const testimonials = [
 const aboutIntro =
   "Product Designer with experience designing web and mobile products end to end, from research and wireframing through high-fidelity delivery and developer handoff. My work spans SaaS dashboards, messaging and collaboration tools, marketplaces and AI-powered products — alongside branding and illustration. I lead design independently, mentor junior designers, and work directly with engineering and product teams in agile environments, using AI-assisted tools like Claude, ChatGPT and Lovable to move faster from idea to prototype.";
 
+/* Each role has a `details` list — it opens in a dropdown when the row is
+   clicked. ✏️ Edit these bullets to match what you want to show. */
 const experience = [
   {
     company: "Stackchase",
     role: "Lead UI/UX Designer — Ration",
     period: "Oct 2024 — Present",
+    details: [
+      "Lead end-to-end UI/UX for Ration, a web and mobile collaboration suite (Mail, Contacts, Calendar, Tasks, Chat) — 200+ screens across both platforms.",
+      "Design Team Lead, working daily with developers, product managers, QA, marketing and support to deliver user-centred solutions on schedule.",
+      "Run sprint planning, reviews and retrospectives — the team ships 90% of planned features on time.",
+      "Own the full process from research and ideation to high-fidelity prototypes and developer handoff, cutting rework with clearer handoff documentation.",
+      "Present weekly demos to stakeholders, reducing follow-up questions by 40%.",
+      "Built and maintain a shared design system that cut component creation time by an estimated 30%.",
+    ],
   },
   {
     company: "GOMYCODE",
     role: "Product Design Instructor",
     period: "Sep 2024 — Present",
+    details: [
+      "Teach hands-on product design to 30+ students, guiding them through real-world projects and portfolio development.",
+      "Cover UX research, interaction design, wireframing, prototyping and usability testing — averaging a 4.6/5 student satisfaction score.",
+      "Give practical feedback and career mentorship, helping students build confidence and job-ready skills.",
+    ],
   },
   {
     company: "Freelance",
     role: "UI/UX Designer — ServaMarket, Clan, Wakapad",
     period: "Dec 2023 — Feb 2026",
+    details: [
+      "Sole freelance product designer across multiple ventures, owning the process from discovery through developer-ready handoff.",
+      "ServaMarket — marketplace web app: 100+ screens covering onboarding, listings and service booking, checkout and payment flows designed to reduce drop-off, plus a dual user and admin dashboard.",
+      "Clan — ride-sharing and community app: ride-request flows (post a ride, join a ride, seat availability), interest-group communities, direct messaging and a wallet/points system.",
+      "Wakapad — property rental platform: search and filtering (location, price, bedrooms, furnishing), listing pages and booking flows, plus an agent dashboard for managing listings and bookings.",
+      "Delivered complete Figma prototypes, user flows and component documentation with every handoff.",
+    ],
   },
   {
     company: "HNG Tech",
     role: "Product Designer — TIFI",
     period: "Jun 2024 — Aug 2024",
+    details: [
+      "Worked with a cross-functional team of 8 designers to ship an AI homework assistant, improving feature delivery speed by 20%.",
+      "Designed TIFI, an AI-powered tool for transcription, summarisation and visual content creation, from research through to final prototype.",
+      "Ran UX research, ideation, wireframing and usability testing across 3 iteration cycles to improve clarity and task completion rates.",
+      "Designed admin dashboards for internal team management: user analytics, content moderation and activity monitoring.",
+    ],
   },
   {
     company: "Brain Quest",
     role: "UI/UX Design Intern",
     period: "Jan 2023 — Apr 2024",
-  },
-];
-
-const education = [
-  {
-    company: "Delta State University",
-    role: "BSc.Ed Geography and Education",
-    period: "",
-  },
-  {
-    company: "Dev and Design",
-    role: "Product Design certification",
-    period: "2023",
-  },
-  {
-    company: "Ingressive for Good + Zuri Training",
-    role: "Product Design certification",
-    period: "2022",
-  },
-  {
-    company: "Perxels Design School",
-    role: "UI/UX Design certification",
-    period: "2022",
+    details: [
+      "Designed 3+ responsive websites in Wix Studio with consistent, accessible experiences across desktop and mobile breakpoints.",
+      "Worked with international stakeholders on iterative, feedback-driven revisions, delivering every project on schedule in a fast-paced remote environment.",
+    ],
   },
 ];
 
@@ -1106,27 +1115,22 @@ function Experience() {
       <p className="side-label">Experience</p>
       <ul className="xp-list">
         {experience.map((job) => (
-          <li key={job.company} className="xp-row">
-            <span className="xp-company">{job.company}</span>
-            <span className="xp-role">{job.role}</span>
-            <span className="xp-period">{job.period}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
-function Education() {
-  return (
-    <section className="about-block">
-      <p className="side-label">Education & certifications</p>
-      <ul className="xp-list">
-        {education.map((item) => (
-          <li key={item.company} className="xp-row">
-            <span className="xp-company">{item.company}</span>
-            <span className="xp-role">{item.role}</span>
-            <span className="xp-period">{item.period}</span>
+          <li key={job.company} className="xp-item">
+            <details>
+              <summary className="xp-row">
+                <span className="xp-company">{job.company}</span>
+                <span className="xp-role">{job.role}</span>
+                <span className="xp-period">
+                  {job.period}
+                  <span className="xp-plus" aria-hidden="true" />
+                </span>
+              </summary>
+              <ul className="xp-details">
+                {job.details.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </details>
           </li>
         ))}
       </ul>
@@ -1196,7 +1200,6 @@ function About() {
     <section className="about">
       <AboutIntro />
       <Experience />
-      <Education />
       <Services />
       <Faq />
     </section>
