@@ -179,24 +179,6 @@ const socials = [
                 (projects with an external URL skip the case-study page) */
 const projects = [
   {
-    slug: "xmint",
-    client: "Xmint",
-    title: "AI Investment Mobile App",
-    category: "Product Design",
-    from: "#1cb5ae",
-    to: "#0e6f8c",
-    logoTone: "light",
-    image: xmintImage,
-    external:
-      "https://www.behance.net/gallery/249278977/Xmint-AI-Investment-Mobile-App-UXUI-Case-Study",
-    year: "",
-    role: "Product Designer",
-    overview:
-      "✏️ Write 2–3 sentences about Xmint — what the project was, your role and the outcome.",
-    sections: [],
-    gallery: [],
-  },
-  {
     slug: "ration",
     client: "Ration",
     title: "Unified Digital Workspace",
@@ -255,6 +237,60 @@ const projects = [
       rationCase5,
       rationCase6,
     ],
+  },
+  {
+    slug: "xmint",
+    client: "Xmint",
+    title: "AI Investment Mobile App",
+    category: "Product Design",
+    from: "#1cb5ae",
+    to: "#0e6f8c",
+    logoTone: "light",
+    image: xmintImage,
+    external:
+      "https://www.behance.net/gallery/249278977/Xmint-AI-Investment-Mobile-App-UXUI-Case-Study",
+    year: "",
+    role: "Product Designer",
+    overview:
+      "✏️ Write 2–3 sentences about Xmint — what the project was, your role and the outcome.",
+    sections: [],
+    gallery: [],
+  },
+  {
+    slug: "reclaim",
+    client: "Reclaim",
+    title: "Brand Identity & Illustration",
+    category: "Branding & Illustration",
+    from: "#e9e2d6",
+    to: "#8a6f4e",
+    logoTone: "dark",
+    image: reclaimImage,
+    external:
+      "https://www.behance.net/gallery/257106149/Reclaim-Brand-Identity-Illustration",
+    year: "",
+    role: "Brand Designer",
+    overview:
+      "Reclaim is a brand identity and illustration system for a mental-health recovery journey — a warm visual language, character illustration and social-impact storytelling that make a difficult subject feel human.",
+    sections: [],
+    gallery: [],
+  },
+  {
+    slug: "breeze",
+    client: "Breeze",
+    title: "Brand Guidelines",
+    category: "Branding & Illustration",
+    from: "#f7f5ef",
+    to: "#dbe6c9",
+    logoTone: "dark",
+    image: breezeImage,
+    external:
+      "https://www.behance.net/gallery/256106581/Breeze-Brand-Guidelines",
+    year: "",
+    role: "Brand Designer",
+    overview:
+      "✏️ Write 2–3 sentences about Breeze — what the project was, your role and the outcome.",
+    sections: [],
+    gallery: [],
   },
   {
     slug: "servamarket",
@@ -327,24 +363,6 @@ const projects = [
     gallery: [],
   },
   {
-    slug: "breeze",
-    client: "Breeze",
-    title: "Brand Guidelines",
-    category: "Branding & Illustration",
-    from: "#f7f5ef",
-    to: "#dbe6c9",
-    logoTone: "dark",
-    image: breezeImage,
-    external:
-      "https://www.behance.net/gallery/256106581/Breeze-Brand-Guidelines",
-    year: "",
-    role: "Brand Designer",
-    overview:
-      "✏️ Write 2–3 sentences about Breeze — what the project was, your role and the outcome.",
-    sections: [],
-    gallery: [],
-  },
-  {
     slug: "storm",
     client: "Storm",
     title: "Campaign Illustration & Character Design",
@@ -394,24 +412,6 @@ const projects = [
     role: "Brand Designer",
     overview:
       "✏️ Write 2–3 sentences about Unwind — what the project was, your role and the outcome.",
-    sections: [],
-    gallery: [],
-  },
-  {
-    slug: "reclaim",
-    client: "Reclaim",
-    title: "Brand Identity & Illustration",
-    category: "Branding & Illustration",
-    from: "#e9e2d6",
-    to: "#8a6f4e",
-    logoTone: "dark",
-    image: reclaimImage,
-    external:
-      "https://www.behance.net/gallery/257106149/Reclaim-Brand-Identity-Illustration",
-    year: "",
-    role: "Brand Designer",
-    overview:
-      "Reclaim is a brand identity and illustration system for a mental-health recovery journey — a warm visual language, character illustration and social-impact storytelling that make a difficult subject feel human.",
     sections: [],
     gallery: [],
   },
