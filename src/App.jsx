@@ -39,12 +39,26 @@ const site = {
 };
 
 const skills = [
-  "Product Design",
-  "Figma",
-  "UI Design",
+  "UX/UI Design",
+  "Interaction Design",
+  "Visual Design",
+  "Design Systems",
+  "Wireframing & Prototyping",
   "UX Research",
-  "React Native",
+  "Usability Testing",
+  "Accessibility",
   "Branding",
+  "Illustration",
+  "Payment & Checkout Design",
+  "Dashboard & Data Viz",
+  "Agile/Sprint",
+  "Developer Handoff",
+  "Mentoring & Coaching",
+  "Figma",
+  "Adobe Illustrator",
+  "HTML & CSS",
+  "Notion",
+  "AI-Assisted Design",
 ];
 
 /* ---- Sidebar "Kind words" slider (✏️ add your real quotes here) ----
@@ -75,21 +89,57 @@ const testimonials = [
 
 /* ---- About page (shown when you click "About" in the header) ---- */
 const aboutIntro =
-  "I'm a Product Designer with 3+ years of experience designing intuitive web and mobile experiences that balance user needs with business goals. I've led end-to-end design for complex products — from research and wireframing through to high-fidelity delivery and developer handoff.";
+  "Product Designer with experience designing web and mobile products end to end, from research and wireframing through high-fidelity delivery and developer handoff. My work spans SaaS dashboards, messaging and collaboration tools, marketplaces and AI-powered products — alongside branding and illustration. I lead design independently, mentor junior designers, and work directly with engineering and product teams in agile environments, using AI-assisted tools like Claude, ChatGPT and Lovable to move faster from idea to prototype.";
 
 const experience = [
   {
     company: "Stackchase",
-    role: "Lead UI/UX Designer",
-    period: "Now",
+    role: "Lead UI/UX Designer — Ration",
+    period: "Oct 2024 — Present",
   },
   {
-    company: "GoMyCode",
+    company: "GOMYCODE",
     role: "Product Design Instructor",
-    period: "2024 — 2026",
+    period: "Sep 2024 — Present",
   },
-  { company: "HNG Tech", role: "Product Designer", period: "2024" },
-  { company: "Brain Quest", role: "UI/UX Designer Intern", period: "2024" },
+  {
+    company: "Freelance",
+    role: "UI/UX Designer — ServaMarket, Clan, Wakapad",
+    period: "Dec 2023 — Feb 2026",
+  },
+  {
+    company: "HNG Tech",
+    role: "Product Designer — TIFI",
+    period: "Jun 2024 — Aug 2024",
+  },
+  {
+    company: "Brain Quest",
+    role: "UI/UX Design Intern",
+    period: "Jan 2023 — Apr 2024",
+  },
+];
+
+const education = [
+  {
+    company: "Delta State University",
+    role: "BSc.Ed Geography and Education",
+    period: "",
+  },
+  {
+    company: "Dev and Design",
+    role: "Product Design certification",
+    period: "2023",
+  },
+  {
+    company: "Ingressive for Good + Zuri Training",
+    role: "Product Design certification",
+    period: "2022",
+  },
+  {
+    company: "Perxels Design School",
+    role: "UI/UX Design certification",
+    period: "2022",
+  },
 ];
 
 const services = [
@@ -1067,6 +1117,23 @@ function Experience() {
   );
 }
 
+function Education() {
+  return (
+    <section className="about-block">
+      <p className="side-label">Education & certifications</p>
+      <ul className="xp-list">
+        {education.map((item) => (
+          <li key={item.company} className="xp-row">
+            <span className="xp-company">{item.company}</span>
+            <span className="xp-role">{item.role}</span>
+            <span className="xp-period">{item.period}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 function Services() {
   return (
     <section className="about-block">
@@ -1129,6 +1196,7 @@ function About() {
     <section className="about">
       <AboutIntro />
       <Experience />
+      <Education />
       <Services />
       <Faq />
     </section>
