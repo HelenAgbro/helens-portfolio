@@ -13,6 +13,16 @@ import breezeImage from "./assets/breeze-branding.jpg";
 import stormImage from "./assets/storm-branding.jpg";
 import runwayFashionImage from "./assets/runway-fashion-branding.jpg";
 import unwindImage from "./assets/unwind-branding.jpg";
+import reclaimImage from "./assets/reclaim-branding.jpg";
+
+/* Ration case-study gallery (src/assets) */
+import rationCase1 from "./assets/ration-case-1.jpg";
+import rationCase2 from "./assets/ration-case-2.jpg";
+import rationCase3 from "./assets/ration-case-3.jpg";
+import rationCase4 from "./assets/ration-case-4.jpg";
+import rationCase5 from "./assets/ration-case-5.jpg";
+import rationCase6 from "./assets/ration-case-6.jpg";
+import rationProcess from "./assets/ration-design-process.png";
 
 /* =========================================================================
    ✏️  EDIT YOUR CONTENT HERE
@@ -29,39 +39,57 @@ const site = {
 };
 
 const skills = [
-  "Web Design",
+  "Product Design",
   "Figma",
-  "Copywriting",
-  "Graphic Design",
-  "Front-end",
-  "User Research",
+  "UI Design",
+  "UX Research",
+  "React Native",
+  "Branding",
 ];
 
-const testimonial = {
-  quote:
-    "Helen consistently delivered top-tier work for us — sharp thinking, fast turnarounds and a real pleasure to collaborate with.",
-  author: "Jordan Blake",
-  role: "Founder, Northwind Studio",
-};
+/* ---- Sidebar "Kind words" slider (✏️ add your real quotes here) ----
+   The card shows one entry at a time and cycles through the list; the bar
+   on its top edge has one segment per entry and fills for the active one.
+   Optional: import a photo and a company logo from src/assets and set them
+   as `avatar` / `logo` — they render as the overlapping avatar pair. */
+const testimonials = [
+  {
+    quote:
+      "Helen consistently delivered top-tier work for us — sharp thinking, fast turnarounds and a real pleasure to collaborate with.",
+    author: "Jordan Blake",
+    role: "Founder, Northwind Studio",
+    avatar: "",
+    logo: "",
+  },
+  {
+    /* ✏️ Placeholder slide — replace with a real quote, or delete this entry
+       if you only have one testimonial. */
+    quote:
+      "✏️ Replace this slide with a real quote from a client, or delete it.",
+    author: "✏️ Client name",
+    role: "✏️ Role, Company",
+    avatar: "",
+    logo: "",
+  },
+];
 
 /* ---- About page (shown when you click "About" in the header) ---- */
 const aboutIntro =
-  "After years of honing my skills through personal projects and collaborations, I've decided to take the leap into freelancing — focusing on design that doesn't just look good, but truly works for the people using it.";
+  "I'm a Product Designer with 3+ years of experience designing intuitive web and mobile experiences that balance user needs with business goals. I've led end-to-end design for complex products — from research and wireframing through to high-fidelity delivery and developer handoff.";
 
 const experience = [
   {
-    company: "Ribbon TMS",
-    role: "Product Lead & Designer",
-    period: "2023 — Now",
+    company: "Stackchase",
+    role: "Lead UI/UX Designer",
+    period: "Now",
   },
   {
-    company: "The Consode",
-    role: "Senior Product Designer",
-    period: "2023 — 2024",
+    company: "GoMyCode",
+    role: "Product Design Instructor",
+    period: "2024 — 2026",
   },
-  { company: "Medalla", role: "Product Designer", period: "2022" },
-  { company: "CatchUp", role: "Product Designer", period: "2022" },
-  { company: "HNG", role: "Product Design Intern", period: "2021" },
+  { company: "HNG Tech", role: "Product Designer", period: "2024" },
+  { company: "Brain Quest", role: "UI/UX Designer Intern", period: "2024" },
 ];
 
 const services = [
@@ -121,9 +149,8 @@ const faqs = [
 ];
 
 const socials = [
-  { label: "X / Twitter", url: "https://x.com/yourhandle" },
-  { label: "LinkedIn", url: "https://www.linkedin.com/in/yourhandle" },
-  { label: "Dribbble", url: "https://dribbble.com/yourhandle" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/helen-agbro" },
+  { label: "Behance", url: "https://www.behance.net/helenagbro01" },
 ];
 
 /* Each project becomes a card — clicking it opens a case-study page at
@@ -132,27 +159,36 @@ const socials = [
 
    ✏️ Fill in your real case-study content per project:
    - slug       the URL name (lowercase + dashes): #/project/xmint
-   - client     the project name shown on the card
-   - title      a short one-liner shown under the name (e.g. "Expense-
-                tracking app") — currently the category as a placeholder
+   - client     the project name — shown large on the card and as the
+                case-study title
+   - title      a short descriptor, shown under the name on the card and
+                as the eyebrow above the case-study title
+                (e.g. "AI Investment Mobile App")
    - image      the cover from src/assets — shown on the card and as the
                 case-study hero
-   - year/role  shown in the case-study meta row
+   - year/role  shown in the case-study header and meta row
+   - tools      tools used (e.g. "Figma, FigJam") — case-study meta row
+   - focus      focus areas (e.g. "Dashboard UI, Web App") — meta row
+   - link       optional outbound URL, shown as "Link" in the meta row
    - overview   2–3 sentences about the project (✏️ placeholders below)
-   - sections   optional { heading, text } blocks (problem, solution…)
+   - highlights optional bullet list shown under "Key Highlights"
+   - sections   optional { heading, text, image } blocks (problem,
+                solution…) — `image` is optional
    - gallery    optional extra screenshots: [img1, img2, …]
-   - external   e.g. "https://www.behance.net/gallery/…" to link out */
+   - external   e.g. "https://www.behance.net/gallery/…" to link out
+                (projects with an external URL skip the case-study page) */
 const projects = [
   {
     slug: "xmint",
     client: "Xmint",
-    title: "Product design",
+    title: "AI Investment Mobile App",
     category: "Product Design",
     from: "#1cb5ae",
     to: "#0e6f8c",
     logoTone: "light",
     image: xmintImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/249278977/Xmint-AI-Investment-Mobile-App-UXUI-Case-Study",
     year: "",
     role: "Product Designer",
     overview:
@@ -162,20 +198,63 @@ const projects = [
   },
   {
     slug: "ration",
-    client: "ration",
-    title: "Product design",
+    client: "Ration",
+    title: "Unified Digital Workspace",
     category: "Product Design",
     from: "#f7c900",
     to: "#dd9f00",
     logoTone: "dark",
     image: rationImage,
     external: "",
-    year: "",
-    role: "Product Designer",
+    year: "", /* ✏️ add the year if you want it in the case-study header */
+    role: "Lead Product Designer",
+    /* ✏️ add the tools you used (e.g. "Figma, FigJam") to show them here */
+    tools: "",
+    focus: "Design System, Web & Mobile, Multi-module UX",
     overview:
-      "✏️ Write 2–3 sentences about ration — what the project was, your role and the outcome.",
-    sections: [],
-    gallery: [],
+      "Ration is an all-in-one digital workspace that helps organisations manage their communication, collaboration and everyday work from a single platform. As Lead Product Designer at Stackchase, I led the end-to-end redesign and expansion of Ration — evaluating the previous interface, creating a new design system, and taking UX, UI, prototyping and user testing through to developer handoff.",
+    highlights: [
+      "Redesigned the product around one consistent application structure",
+      "Designed nine modules — Mail, Chat, Meetings, Calendar, Contacts, Drive, Forms, Notes and Tasks",
+      "Built a reusable design system that keeps every module consistent",
+      "Prototyped and user-tested with internal teams and existing users",
+      "Desktop experiences shipped, with mobile Mail, Chat and Contacts already live",
+    ],
+    sections: [
+      {
+        heading: "The Challenge",
+        text: "The central challenge was designing multiple productivity tools that served different purposes while making them feel like parts of the same application. Each module had its own functionality, content structure and user interactions, and users should not feel as though they were moving between entirely different applications. Three considerations guided the work: consistency across modules, simplicity and usability, and scalability — a foundation that could support more modules without compromising the experience.",
+      },
+      {
+        heading: "My Design Process",
+        text: "I approached the project in stages, starting with understanding the existing product before moving into the redesign and implementation process.",
+        image: rationProcess,
+      },
+      {
+        heading: "Designing the Ration Ecosystem",
+        text: "One of the defining aspects of this project was designing multiple productivity tools under a shared application structure. I designed nine major modules, each serving a different organisational need: Ration Mail, Chat, Meetings, Calendar, Contacts, Drive, Forms, Notes and Tasks.",
+      },
+      {
+        heading: "My Role",
+        text: "As the Lead Product Designer I was the sole designer on the team when the redesign began, working closely with the Product Manager who provided the product requirements and feature specifications. My responsibility was to translate those into functional, intuitive and visually consistent product experiences — owning the process from evaluating the previous product to preparing designs for implementation.",
+      },
+      {
+        heading: "The Outcome",
+        text: "Ration is now a live product, with organisations using the platform to support communication and collaboration among their employees. The redesign delivered a consistent application structure, nine product modules, a reusable design system, interactive prototypes tested with internal team members and existing users, desktop experiences taken through development and released, and mobile applications with Mail, Chat and Contacts already live.",
+      },
+      {
+        heading: "Reflection and Learnings",
+        text: "Ration gave me the opportunity to approach product design at an ecosystem level rather than focusing on a single feature or application. The biggest takeaway was the importance of designing for consistency without sacrificing functionality — a shared design foundation makes an entire ecosystem easier to understand and use. I also learned to think beyond the design file: collaborating with developers, testing prototypes with existing users and reviewing implementations were all essential to delivering the intended experience.",
+      },
+    ],
+    gallery: [
+      rationCase1,
+      rationCase2,
+      rationCase3,
+      rationCase4,
+      rationCase5,
+      rationCase6,
+    ],
   },
   {
     slug: "servamarket",
@@ -197,13 +276,14 @@ const projects = [
   {
     slug: "easy-migrate",
     client: "Easy migrate",
-    title: "Product design",
+    title: "Simplifying the Visa Journey",
     category: "Product Design",
     from: "#f4f2ea",
     to: "#cfe0cd",
     logoTone: "dark",
     image: easyMigrateImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/235652915/Easy-Migrate-Simplifying-the-Visa-Journey-UIUX",
     year: "",
     role: "Product Designer",
     overview:
@@ -214,13 +294,14 @@ const projects = [
   {
     slug: "tifi",
     client: "Tifi",
-    title: "Product design",
+    title: "Elevating Content Creation with AI",
     category: "Product Design",
     from: "#b08968",
     to: "#4f3823",
     logoTone: "light",
     image: tifiImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/207587271/TiFi-Elevating-Content-Creation-with-AI-Case-Study",
     year: "",
     role: "Product Designer",
     overview:
@@ -231,13 +312,13 @@ const projects = [
   {
     slug: "homework-ai",
     client: "Homework AI",
-    title: "Product design",
+    title: "AI Homework Assistant",
     category: "Product Design",
     from: "#2b6cb0",
     to: "#1a365d",
     logoTone: "light",
     image: homeworkAiImage,
-    external: "",
+    external: "https://www.behance.net/gallery/252871641/AIForHomework",
     year: "",
     role: "Product Designer",
     overview:
@@ -248,13 +329,14 @@ const projects = [
   {
     slug: "breeze",
     client: "Breeze",
-    title: "Brand identity",
+    title: "Brand Guidelines",
     category: "Branding & Illustration",
     from: "#f7f5ef",
     to: "#dbe6c9",
     logoTone: "dark",
     image: breezeImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/256106581/Breeze-Brand-Guidelines",
     year: "",
     role: "Brand Designer",
     overview:
@@ -265,13 +347,14 @@ const projects = [
   {
     slug: "storm",
     client: "Storm",
-    title: "Brand identity",
+    title: "Campaign Illustration & Character Design",
     category: "Branding & Illustration",
     from: "#5a67d8",
     to: "#2c3e8f",
     logoTone: "light",
     image: stormImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/254110981/STORM-Campaign-Illustration-Character-Design",
     year: "",
     role: "Brand Designer",
     overview:
@@ -282,13 +365,14 @@ const projects = [
   {
     slug: "runway-fashion",
     client: "Runway Fashion",
-    title: "Brand identity",
+    title: "Flat Vector Illustration & Art Direction",
     category: "Branding & Illustration",
     from: "#d69e2e",
     to: "#7b341e",
     logoTone: "light",
     image: runwayFashionImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/254880513/Flat-Vector-Fashion-Illustration-Runway-Art-Direction",
     year: "",
     role: "Brand Designer",
     overview:
@@ -310,6 +394,24 @@ const projects = [
     role: "Brand Designer",
     overview:
       "✏️ Write 2–3 sentences about Unwind — what the project was, your role and the outcome.",
+    sections: [],
+    gallery: [],
+  },
+  {
+    slug: "reclaim",
+    client: "Reclaim",
+    title: "Brand Identity & Illustration",
+    category: "Branding & Illustration",
+    from: "#e9e2d6",
+    to: "#8a6f4e",
+    logoTone: "dark",
+    image: reclaimImage,
+    external:
+      "https://www.behance.net/gallery/257106149/Reclaim-Brand-Identity-Illustration",
+    year: "",
+    role: "Brand Designer",
+    overview:
+      "Reclaim is a brand identity and illustration system for a mental-health recovery journey — a warm visual language, character illustration and social-impact storytelling that make a difficult subject feel human.",
     sections: [],
     gallery: [],
   },
@@ -340,25 +442,6 @@ function ChatIcon() {
   );
 }
 
-function UsersIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  );
-}
-
 function ArrowIcon() {
   return (
     <svg
@@ -385,15 +468,16 @@ function ArrowIcon() {
 /* ---- Reveal-on-scroll: fades content in as it enters the viewport ---- */
 function useReveal(threshold = 0.15) {
   const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  /* Start visible when IntersectionObserver is unavailable (SSR / old
+     browsers) so nothing is stuck hidden without a setState-in-effect. */
+  const [visible, setVisible] = useState(
+    () => typeof IntersectionObserver === "undefined",
+  );
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
+    if (typeof IntersectionObserver === "undefined") return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -484,7 +568,90 @@ function Nav({ current = "home" }) {
   );
 }
 
-/* ---- Sticky left column: intro, skills marquee, testimonial card ---- */
+/* ---- "Kind words" slider: one quote at a time. The bar on the top edge has
+        a segment per quote — the active segment fills over SLIDE_MS, then the
+        next quote blurs in. Click it (or press Enter/Space) to skip ahead. ---- */
+const SLIDE_MS = 7000;
+
+function TestimonialSlider() {
+  const [index, setIndex] = useState(0);
+  const count = testimonials.length;
+  const item = testimonials[index];
+  /* The second avatar circle is the author's company logo, so fall back to
+     the initial of the company part of the role line. */
+  const company = item.role.includes(",")
+    ? item.role.split(",").slice(1).join(",").trim()
+    : item.role;
+  const next = () => setIndex((i) => (i + 1) % count);
+
+  return (
+    <figure
+      className="testimonial-card"
+      role="button"
+      tabIndex={0}
+      aria-label={`Testimonial ${index + 1} of ${count} — show the next one`}
+      onClick={next}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          next();
+        }
+      }}
+    >
+      <span className="t-bar" aria-hidden="true">
+        {testimonials.map((entry, i) => (
+          <span
+            key={`${i}-${entry.author}`}
+            className={
+              i === index
+                ? "t-seg is-active"
+                : i < index
+                  ? "t-seg is-done"
+                  : "t-seg"
+            }
+          >
+            {i === index && (
+              <span
+                className="t-fill"
+                style={{ animationDuration: `${SLIDE_MS}ms` }}
+                onAnimationEnd={next}
+              />
+            )}
+          </span>
+        ))}
+      </span>
+
+      <div className="t-slide" key={index} aria-live="polite">
+        <blockquote className="quote">
+          <span className="quote-dots" aria-hidden="true">
+            ...
+          </span>{" "}
+          {item.quote}
+        </blockquote>
+        <figcaption className="quote-author">
+          <span className="avatar-stack">
+            <span className="t-avatar">
+              {item.avatar ? (
+                <img src={item.avatar} alt="" />
+              ) : (
+                item.author.charAt(0)
+              )}
+            </span>
+            <span className="t-avatar">
+              {item.logo ? <img src={item.logo} alt="" /> : company.charAt(0)}
+            </span>
+          </span>
+          <span className="author-text">
+            <strong>{item.author}</strong>
+            <span className="author-role">{item.role}</span>
+          </span>
+        </figcaption>
+      </div>
+    </figure>
+  );
+}
+
+/* ---- Sticky left column: intro, skills marquee, testimonial slider ---- */
 function Sidebar() {
   const half = Math.ceil(skills.length / 2);
   const rowA = skills.slice(0, half);
@@ -497,10 +664,6 @@ function Sidebar() {
         <h1 className="headline">
           {site.headline} <span className="muted">{site.headlineMuted}</span>
         </h1>
-        <span className="open-badge">
-          <span className="open-dot" aria-hidden="true" />
-          Open to work
-        </span>
         <div className="cta-wrap">
           <span className="cta-particles" aria-hidden="true">
             <i />
@@ -519,7 +682,7 @@ function Sidebar() {
         <div className="dotted" aria-hidden="true" />
       </div>
 
-      <div className="side-block">
+      <div className="side-block side-block-dots">
         <p className="side-label">Skills</p>
         <div className="skills-marquee">
           <div className="skills-row">
@@ -561,26 +724,8 @@ function Sidebar() {
         </div>
       </div>
 
-      <div className="side-block">
-        <p className="side-label">Kind words</p>
-        <figure className="testimonial-card">
-          <span className="corner tl" aria-hidden="true" />
-          <span className="corner tr" aria-hidden="true" />
-          <span className="corner bl" aria-hidden="true" />
-          <span className="corner br" aria-hidden="true" />
-          <span className="t-num" aria-hidden="true">
-            02
-          </span>
-          <blockquote className="quote">“{testimonial.quote}”</blockquote>
-          <figcaption className="quote-author">
-            <span className="t-avatar" aria-hidden="true">
-              {testimonial.author.charAt(0)}
-            </span>
-            <span>
-              <strong>{testimonial.author}</strong> · {testimonial.role}
-            </span>
-          </figcaption>
-        </figure>
+      <div className="side-block side-block-plain">
+        <TestimonialSlider />
       </div>
     </aside>
   );
@@ -631,11 +776,8 @@ function ProjectCard({ project, index }) {
 
         <div className="card-overlay">
           <div className="card-meta">
-            <span className="card-client">
-              <UsersIcon />
-              {project.client}
-            </span>
-            <h3 className="card-title">{project.title}</h3>
+            <h3 className="card-title">{project.client}</h3>
+            <span className="card-client">{project.title}</span>
           </div>
           <span className="card-arrow" aria-hidden="true">
             <ArrowIcon />
@@ -724,13 +866,14 @@ function Contact() {
   );
 }
 
-function Footer() {
-  const year = new Date().getFullYear();
+/* Resolved once at module load so the component stays pure during render */
+const currentYear = new Date().getFullYear();
 
+function Footer() {
   return (
     <footer className="footer">
       <p>
-        © {year} {site.name}
+        © {currentYear} {site.name}
       </p>
       <nav className="footer-links">
         <a href="#projects">Projects</a>
@@ -747,8 +890,14 @@ function Footer() {
 /* ---- Case-study page for a single project ---- */
 function ProjectDetail({ project }) {
   const [ref, visible] = useReveal()
-  const index = projects.findIndex((p) => p.slug === project.slug)
-  const next = projects[(index + 1) % projects.length]
+  /* Only projects without an external URL get a case-study page, so
+     "next project" cycles through those — never off to Behance. */
+  const caseStudies = projects.filter((p) => !p.external)
+  const index = caseStudies.findIndex((p) => p.slug === project.slug)
+  const next =
+    caseStudies.length > 1
+      ? caseStudies[(index + 1) % caseStudies.length]
+      : null
   const tone = project.logoTone === 'light' ? 'logo-light' : 'logo-dark'
 
   return (
@@ -759,6 +908,12 @@ function ProjectDetail({ project }) {
       <a className="case-back" href="#projects">
         ← All projects
       </a>
+
+      <header className="case-head">
+        <span className="case-eyebrow">{project.title}</span>
+        <h2 className="case-title">{project.client}</h2>
+        {project.year && <span className="case-year">{project.year}</span>}
+      </header>
 
       <div
         className="case-hero"
@@ -774,31 +929,62 @@ function ProjectDetail({ project }) {
         )}
       </div>
 
-      <div className="case-meta">
-        <div>
-          <span className="side-label">Client</span>
-          <p className="case-meta-value">{project.client}</p>
-        </div>
-        <div>
-          <span className="side-label">Role</span>
-          <p className="case-meta-value">{project.role}</p>
-        </div>
-        <div>
-          <span className="side-label">Year</span>
-          <p className="case-meta-value">{project.year}</p>
-        </div>
-        <div>
-          <span className="side-label">Type</span>
-          <p className="case-meta-value">{project.category}</p>
-        </div>
-      </div>
-
+      <h2 className="case-heading">Overview</h2>
       <p className="case-overview">{project.overview}</p>
+
+      {(project.highlights || []).length > 0 && (
+        <section className="case-section">
+          <h2>Key Highlights</h2>
+          <ul className="case-highlights">
+            {project.highlights.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div className="case-meta">
+        {[
+          { label: "Role", value: project.role },
+          { label: "Tools", value: project.tools },
+          { label: "Focus", value: project.focus },
+        ]
+          .filter((item) => item.value)
+          .map((item) => (
+            <div key={item.label}>
+              <span className="side-label">{item.label}</span>
+              <p className="case-meta-value">{item.value}</p>
+            </div>
+          ))}
+
+        {project.link && (
+          <div>
+            <span className="side-label">Link</span>
+            <p className="case-meta-value">
+              <a
+                className="case-meta-link"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.link.replace(/^https?:\/\//, "")}
+              </a>
+            </p>
+          </div>
+        )}
+      </div>
 
       {(project.sections || []).map((section) => (
         <section key={section.heading} className="case-section">
           <h2>{section.heading}</h2>
           <p>{section.text}</p>
+          {section.image && (
+            <img
+              className="case-section-img"
+              src={section.image}
+              alt={`${section.heading} — ${project.client}`}
+            />
+          )}
         </section>
       ))}
 
@@ -810,17 +996,19 @@ function ProjectDetail({ project }) {
         </div>
       )}
 
-      <a className="case-next" href={`#/project/${next.slug}`}>
-        <span>
-          <span className="side-label">Next project</span>
-          <span className="case-next-title">
-            {next.client} — {next.title}
+      {next && (
+        <a className="case-next" href={`#/project/${next.slug}`}>
+          <span>
+            <span className="side-label">Next project</span>
+            <span className="case-next-title">
+              {next.client} — {next.title}
+            </span>
           </span>
-        </span>
-        <span className="case-next-arrow" aria-hidden="true">
-          <ArrowIcon />
-        </span>
-      </a>
+          <span className="case-next-arrow" aria-hidden="true">
+            <ArrowIcon />
+          </span>
+        </a>
+      )}
     </article>
   )
 }
@@ -1047,8 +1235,10 @@ function useHashRoute() {
 export default function App() {
   const hash = useHashRoute();
   const projectMatch = hash.match(/^#\/project\/([^/?#]+)/);
+  /* Projects with an external URL (Behance) have no case-study page, so a
+     direct #/project/<slug> link to one falls back to the home view. */
   const project = projectMatch
-    ? projects.find((p) => p.slug === projectMatch[1])
+    ? projects.find((p) => p.slug === projectMatch[1] && !p.external)
     : null;
   const view = hash.startsWith("#/about")
     ? "about"

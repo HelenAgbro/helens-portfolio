@@ -66,13 +66,16 @@
   font-weight: 700;
 }
 
+/* "Currently active" status — dashed dividers on both sides, like the
+   inspiration's "Avaliability" segment in its nav */
 .status {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   height: var(--nav-h);
-  padding-left: 1.25rem;
-  border-left: 1px solid var(--border);
+  padding: 0 1.25rem;
+  border-left: 1px dashed rgba(0, 0, 0, 0.15);
+  border-right: 1px dashed rgba(0, 0, 0, 0.15);
   font-size: 0.9rem;
   white-space: nowrap;
 }
@@ -180,33 +183,38 @@
   width: 0;
 }
 
-/* Diagonal stripes texture at the top of the sidebar — the inspiration's
-   "BG Stripes" element (opacity 0.1, ~38px tile), fading out downward */
-.sidebar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 480px;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='126'%20height='126'%3E%3Cpath%20fill='none'%20stroke='%2317130e'%20stroke-width='2'%20d='M-1%2024%2024-1M-1%2066%2067-2M-1%20108%20108-1M21%20128%20127%2022m1%2041-65%2065m67-25-25%2025'/%3E%3C/svg%3E");
-  background-size: 38px 38px;
-  opacity: 0.1;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-}
-
-/* Keep sidebar content above the stripes layer */
-.sidebar > * {
-  position: relative;
-  z-index: 1;
-}
-
 .side-block + .side-block {
   margin-top: 1.25rem;
   padding-top: 1.25rem;
   border-top: 1px dashed #d9d4c9;
+}
+
+/* The "Kind words" slider sits directly on the page — no divider above it */
+.side-block + .side-block.side-block-plain {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Dotted texture behind the skills chips — the same 24px dot tile used
+   under the intro */
+.side-block-dots {
+  position: relative;
+}
+
+.side-block-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Ccircle%20cx='24'%20cy='24'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='72'%20cy='24'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='24'%20cy='72'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='72'%20cy='72'%20r='4'%20fill='%2317130e'/%3E%3C/svg%3E");
+  background-size: 24px 24px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Keep the chips above the dots */
+.side-block-dots > * {
+  position: relative;
+  z-index: 1;
 }
 
 .role-pill {
@@ -230,27 +238,6 @@
 
 .headline .muted {
   color: #b7b1a4;
-}
-
-/* Availability badge (like the inspiration's "Open" pill) */
-.open-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1.3rem;
-  padding: 0.45rem 1rem;
-  border: 1px dashed #cfc9bd;
-  border-radius: 999px;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.open-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #23c55e;
-  box-shadow: 0 0 0 3px rgba(35, 197, 94, 0.15);
 }
 
 /* Floating blurred particle specks around the CTA — mirrors the
@@ -348,12 +335,8 @@
     padding-top: 1rem;
   }
 
-  .open-badge {
-    margin-bottom: 1rem;
-  }
-
   .testimonial-card {
-    padding: 1.1rem 1rem;
+    padding: 0.5rem 0 0.25rem;
   }
 }
 
@@ -417,67 +400,170 @@
   }
 }
 
-/* Testimonial card with viewfinder corner brackets + faint number,
-   like the inspiration's "Testimonial Container" */
+/* "Kind words" slider — no panel and no borders: the quote sits directly on
+   the page, with a segmented progress bar along its top edge and each new
+   quote sliding in from the right. */
 .testimonial-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   margin: 0;
-  padding: 1.5rem 1.25rem 1.25rem;
-  border-radius: 14px;
-  background: var(--surface);
+  padding: 0.75rem 0 0.25rem;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.testimonial-card .corner {
+.testimonial-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Segmented progress bar — one segment per quote; the active segment fills
+   over the slide duration, the ones already shown stay dark */
+.t-bar {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 0 solid var(--ink);
-  opacity: 0.5;
+  top: 0;
+  left: 0;
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  height: 2px;
 }
 
-.corner.tl { top: 9px; left: 9px; border-top-width: 1.5px; border-left-width: 1.5px; }
-.corner.tr { top: 9px; right: 9px; border-top-width: 1.5px; border-right-width: 1.5px; }
-.corner.bl { bottom: 9px; left: 9px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
-.corner.br { bottom: 9px; right: 9px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+.t-seg {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: rgba(8, 8, 8, 0.15);
+}
 
-.t-num {
+.t-seg.is-done {
+  background: #212121;
+}
+
+.t-fill {
   position: absolute;
-  top: 0.4rem;
-  right: 1rem;
-  font-family: var(--font-mono);
-  font-size: 4.2rem;
-  line-height: 1;
-  color: rgba(23, 19, 14, 0.06);
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #212121;
+  animation-name: t-fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
+@keyframes t-fill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* One slide at a time — the next quote slides in from the right */
+.t-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  animation: t-slide-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes t-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Quote — 18px Agrandir, left aligned, capped at 280px like the original,
+   and prefixed with a literal "..." */
 .quote {
   position: relative;
-  font-size: 0.98rem;
-  line-height: 1.55;
+  z-index: 1;
+  width: 100%;
+  max-width: 280px;
+  font-size: 1.125rem;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: #0f0f0f;
 }
 
+.quote-dots {
+  letter-spacing: 0;
+}
+
+/* Name + avatar row — the two overlapping circles sit left of the text */
 .quote-author {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  margin-top: 0.9rem;
-  font-size: 0.85rem;
-  color: var(--muted);
+  gap: 12px;
+  width: 100%;
+  max-width: 280px;
+  font-size: 0.9375rem;
+  color: #000;
+}
+
+/* Overlapping avatar pair — the author's photo with their company's logo */
+.avatar-stack {
+  position: relative;
+  flex: none;
+  width: 70px;
+  height: 40px;
 }
 
 .t-avatar {
-  flex: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 40px;
+  overflow: hidden;
   background: var(--ink);
   color: var(--bg);
   font-size: 0.8rem;
+  border: 2px solid var(--bg);
+  border-radius: 72px;
+  box-shadow:
+    0 0.72px 0.72px -1px rgba(0, 0, 0, 0.15),
+    0 2.75px 2.75px -2px rgba(0, 0, 0, 0.14),
+    0 12px 12px -3px rgba(0, 0, 0, 0.1);
+}
+
+.t-avatar:first-child {
+  left: 0;
+}
+
+.t-avatar:last-child {
+  right: 0;
+}
+
+.t-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.author-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.35;
+}
+
+.author-text strong {
+  font-weight: 400;
+}
+
+.author-role {
+  font-size: 0.8125rem;
+  color: rgba(8, 8, 8, 0.6);
 }
 
 /* ---------------- Right column (scrolling) ---------------- */
@@ -591,25 +677,20 @@
   background: linear-gradient(to top, rgba(12, 10, 8, 0.78), rgba(12, 10, 8, 0));
 }
 
-.card-client {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.85rem;
-  opacity: 0.85;
-}
-
-.card-client svg {
-  width: 16px;
-  height: 16px;
-}
-
+/* Project name (large) with its descriptor underneath — the card reads
+   "Movement Labs / WEB 3 Explorer", matching the inspiration's cards */
 .card-title {
-  margin-top: 0.3rem;
+  margin-bottom: 0.35rem;
   font-size: clamp(1.15rem, 1.9vw, 1.55rem);
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1.2;
+}
+
+.card-client {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.85;
 }
 
 /* Arrow chip slides in on hover */
@@ -1100,6 +1181,75 @@
   color: var(--ink);
 }
 
+/* Case-study header — eyebrow (project type), big project name, year —
+   the same order as the inspiration's case-study pages */
+.case-head {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1.75rem;
+}
+
+.case-eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.case-title {
+  font-size: clamp(1.8rem, 3.4vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.case-year {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* "Overview" heading above the case-study body copy */
+.case-heading {
+  margin-bottom: 0.6rem;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+/* Bulleted highlights list */
+.case-highlights {
+  display: grid;
+  gap: 0.55rem;
+  max-width: 60ch;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.case-highlights li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.case-highlights li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  opacity: 0.4;
+}
+
+/* Outbound link in the meta row */
+.case-meta-link {
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s ease, border-color 0.2s ease;
+  word-break: break-word;
+}
+
+.case-meta-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
 .case-hero {
   position: relative;
   display: grid;
@@ -1120,9 +1270,9 @@
 
 .case-meta {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
   padding: 1.25rem 0;
   border-top: 1px solid var(--border);
   border-bottom: 1px dashed var(--border);
@@ -1159,6 +1309,14 @@
   font-size: 1rem;
   line-height: 1.65;
   color: var(--muted);
+}
+
+/* Optional image inside a case-study section. Usually transparent art (e.g.
+   the Ration process diagram), so it has no frame — unlike the gallery
+   screenshots, which keep their dashed border. */
+.case-section-img {
+  width: 100%;
+  margin-top: 1.25rem;
 }
 
 .case-gallery {
@@ -1381,6 +1539,17 @@
   .status-dot {
     transition: none;
     animation: none;
+  }
+
+  /* The fill animation is what advances the slider, so without it the
+     slider waits for a click */
+  .t-slide,
+  .t-fill {
+    animation: none;
+  }
+
+  .t-fill {
+    width: 100%;
   }
 }
 

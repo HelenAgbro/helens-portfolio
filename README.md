@@ -26,14 +26,32 @@ Everything personal lives in one block at the top of `src/App.jsx`
 (`site`, `skills`, `testimonial`, `projects`) — name, role, headline, email,
 skills, testimonial and project entries.
 
-- Clicking a project card opens its **case-study page** at `#/project/<slug>`
-  (hero, client/role/year meta, overview, sections, gallery — all editable
-  per project in the `projects` block). If a project's `external` field has a
-  URL (e.g. a Behance case study), the card opens that link in a new tab
-  instead.
+- Clicking a project card opens its **case-study page** at `#/project/<slug>`:
+  a `← All projects` link, an eyebrow (the project's `title` descriptor), the
+  project name and year, the hero image, an **Overview**, an optional **Key
+  Highlights** list, a Role / Tools / Focus / Link meta row, optional
+  `sections` and `gallery` blocks, and a "Next project" link.
+- If a project's `external` field has a URL (e.g. a Behance case study), the
+  card opens that link in a new tab instead — that project gets no case-study
+  page, and "Next project" only cycles through projects that have one.
+  Eight projects currently link out to Behance (Xmint, Easy migrate, Tifi,
+  Homework AI, Breeze, Storm, Runway Fashion, Reclaim); `ration`,
+  `servamarket` and `unwind` use their own case-study pages.
+- The card shows the project **name** (`client`) large with its **descriptor**
+  (`title`) underneath — e.g. "Movement Labs / WEB 3 Explorer".
 - Project covers live in `src/assets/` (imported at the top of `src/App.jsx`
   and set as each project's `image` — used as the card cover and the
   case-study hero). Add more screenshots per project via `gallery`.
+- `year` / `role` / `tools` / `focus` fill the case-study header and meta row,
+  and `highlights` is the bullet list under "Key Highlights" — all optional,
+  and empty values are simply left out.
+- The sidebar's **Kind words** slider reads the `testimonials` array — one
+  entry per quote (`quote`, `author`, `role`, plus optional `avatar` / `logo`
+  images imported from `src/assets/`, which render as the overlapping avatar
+  pair; until you add them the two circles fall back to initials). The card
+  advances on its own every 7s (`SLIDE_MS`), the bar on its top edge shows one
+  segment per quote, and clicking the card (or pressing Enter/Space) skips
+  ahead. Add or remove entries and the segments update themselves.
 - Each project has a `category` (e.g. "Product Design", "Branding &
   Illustration") shown in the filter tabs above the grid. "All" plus one tab
   per unique category is built automatically — add or rename a category and
@@ -43,11 +61,10 @@ skills, testimonial and project entries.
 - The **Contact page** (nav link, or `#/contact`) shows "Let's collaborate
   today!" with a form that opens a pre-filled email on submit (no backend —
   swap `handleSubmit` in `src/App.jsx` for a real endpoint later), your
-  `site.email`, and the links in `socials` (X / LinkedIn / Dribbble — replace
-  the placeholder handles).
-- Both sub-pages use a tiny hash router — no router library. The sidebar's
-  stripes texture, dot grid, CTA particles and the giant CONTACT word are
-  shared across all three views, mirroring the inspiration site.
+  `site.email`, and the links in `socials` (LinkedIn + Behance).
+- Both sub-pages use a tiny hash router — no router library. The dot grid,
+  CTA particles and the giant CONTACT word are shared across all three
+  views, mirroring the inspiration site.
 - Colours and shared sizes live in `:root` variables in `src/index.css`.
 
 ## Fonts
