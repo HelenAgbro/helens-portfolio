@@ -51,8 +51,11 @@
   --border: #e0ddd4;
   --nav-h: 64px;
 
-  --font-sans: 'Agrandir Regular', 'Inter', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  /* The giant CONTACT word stays on Agrandir — its fit-to-width SVG viewBox
+     is calibrated to Agrandir's metrics, so swapping it would resize the word. */
+  --font-word: 'Agrandir Regular', 'Inter', sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 }
 

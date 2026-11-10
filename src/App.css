@@ -50,7 +50,7 @@
   gap: 0.6rem;
   font-weight: 400;
   font-size: 1.02rem;
-  letter-spacing: 0.32em;
+  letter-spacing: normal;
   white-space: nowrap;
 }
 
@@ -113,6 +113,22 @@
 
 .nav-links a.is-current {
   opacity: 1;
+}
+
+/* CV link in the header — opens the PDF/DOCX resume in a new tab */
+.nav-links a.nav-cv {
+  padding: 0.3rem 0.85rem;
+  border: 1px dashed var(--ink);
+  border-radius: 999px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a.nav-cv:hover {
+  opacity: 1;
+  border-style: solid;
+  background: var(--ink);
+  color: var(--bg);
 }
 
 .nav-right {
@@ -775,7 +791,7 @@
 
 .contact-word {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-word);
   font-size: 178.92368090964146px;
   font-weight: 400;
   line-height: 1.06em;
@@ -978,7 +994,7 @@
   grid-template-columns: 1fr 1.4fr auto;
   align-items: baseline;
   gap: 0.25rem 1.5rem;
-  padding: 1rem 0.25rem;
+  padding: 1.35rem 0.75rem;
   cursor: pointer;
   list-style: none;
   transition: background 0.2s ease;
@@ -1005,7 +1021,7 @@
 .xp-period {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 1.1rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--muted);

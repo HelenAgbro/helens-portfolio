@@ -77,19 +77,49 @@ const skills = [
 const testimonials = [
   {
     quote:
-      "Helen consistently delivered top-tier work for us — sharp thinking, fast turnarounds and a real pleasure to collaborate with.",
-    author: "Jordan Blake",
-    role: "Founder, Northwind Studio",
+      "Helen was a delight to work with. Her designs are user-focused and her attention to detail is very commendable — she translates product requirements into valuable prototypes. As her product manager, I can absolutely recommend her as an asset to any team she joins.",
+    author: "Tayo Adesina",
+    role: "Product Manager | Project Delivery | Agile | SaaS & Fintech",
     avatar: "",
     logo: "",
   },
   {
-    /* ✏️ Placeholder slide — replace with a real quote, or delete this entry
-       if you only have one testimonial. */
     quote:
-      "✏️ Replace this slide with a real quote from a client, or delete it.",
-    author: "✏️ Client name",
-    role: "✏️ Role, Company",
+      "I had the pleasure of working with Helen on a project and it was a great experience. She's a talented UX designer with a strong eye for detail, a collaborative mindset and a thoughtful approach to problem-solving. Her ability to translate ideas into user-focused solutions made a valuable contribution to the project.",
+    author: "Kudirat Nurudeen",
+    role: "UX Designer | Product Designer | Framer Developer",
+    avatar: "",
+    logo: "",
+  },
+  {
+    quote:
+      "I had a great learning experience with Tutor Helen at GOMYCODE. She has a unique way of making complex topics simple and practical — always patient, supportive and deeply knowledgeable. She creates a learning environment that builds both skill and confidence, and I highly recommend her to anyone serious about growing in UI/UX and tech.",
+    author: "Blessing Amune",
+    role: "Graphic Designer, UI/UX Designer",
+    avatar: "",
+    logo: "",
+  },
+  {
+    quote:
+      "Helen was an instructor in a short but highly impactful design cohort I was part of. She has a rare ability to simplify complex ideas, challenge your thinking, and push you toward better design decisions with clarity and intention.",
+    author: "'Sunkanmi Oloyede",
+    role: "Graphic Designer & Content Creator",
+    avatar: "",
+    logo: "",
+  },
+  {
+    quote:
+      "Helen is an outstanding UI/UX coach who explains design concepts clearly and practically. Her guidance, constructive feedback and focus on user-centred design helped me grow confidently in UI/UX. I highly recommend her to anyone looking to build strong, real-world design skills.",
+    author: "Toheeb Tosin",
+    role: "Graphic Designer / UIUX | Real Estate Enthusiast",
+    avatar: "",
+    logo: "",
+  },
+  {
+    quote:
+      "I highly recommend my instructor for her support and commitment to her students' growth. She connected me to an internship opportunity that has greatly impacted my career, allowing me to develop real-world skills and thrive in a professional environment. I'm truly grateful for her guidance and the opportunities she provided.",
+    author: "Oluwatoyin Tayo",
+    role: "Product-Driven Food Scientist transitioning into UI/UX",
     avatar: "",
     logo: "",
   },
@@ -362,7 +392,7 @@ const projects = [
   {
     slug: "servamarket",
     client: "Servamarket",
-    title: "Product design",
+    title: "All-in-One Marketplace",
     category: "Product Design",
     from: "#1e7a45",
     to: "#0b3b24",
@@ -371,9 +401,43 @@ const projects = [
     external: "",
     year: "",
     role: "Product Designer",
+    tools: "",
+    focus: "Marketplace, E-commerce, Rentals & Services — Web App",
     overview:
-      "✏️ Write 2–3 sentences about Servamarket — what the project was, your role and the outcome.",
-    sections: [],
+      "Serva Market is a multi-purpose digital marketplace that brings buying, selling, renting and service provision into one platform. Unlike marketplaces that separate buyers, sellers and service providers into different account types, one account can do all of it — and my focus was making that flexibility feel simple instead of complicated.",
+    highlights: [
+      "One account for buying, selling, renting and offering services",
+      "Price offers, so buyers and sellers can negotiate",
+      "Rental and service marketplace experiences in the same product",
+      "A centralised dashboard for purchases, sales and services offered",
+      "One consistent interface instead of role-based dashboards",
+    ],
+    sections: [
+      {
+        heading: "The Problem",
+        text: "Most marketplace platforms focus on one type of transaction — some are built mainly for buying and selling, while others focus on renting or finding services. Serva Market brings these activities together, and the challenge was making the experience simple enough for users to move between them without feeling like they were using different platforms.",
+      },
+      {
+        heading: "The Design Challenge",
+        text: "The platform had to accommodate different user needs and transaction types while keeping one consistent interface. Three considerations guided the work: multiple roles with one account, simplifying an interface with many available activities, and centralised activity management that doesn't feel cluttered.",
+      },
+      {
+        heading: "My Approach",
+        text: "Rather than asking users to choose whether they are buyers, sellers or service providers when signing up, everyone gets one account and can take on different roles whenever they need to. I focused on a straightforward experience where every feature is reachable without switching accounts or dashboards.",
+      },
+      {
+        heading: "Key Features & Decisions",
+        text: "One account for different activities; browsing, buying and listing items; price offers that give buyers and sellers room to negotiate; renting items and offering or hiring services; and a dashboard that keeps track of everything bought, sold and offered.",
+      },
+      {
+        heading: "The Outcome",
+        text: "Serva Market brings multiple marketplace activities into one connected experience — a unified account structure, one interface supporting several marketplace roles, buying and selling, rental and service experiences, price offers and negotiation, and a centralised dashboard for managing activity.",
+      },
+      {
+        heading: "Reflection",
+        text: "Working on Serva Market reinforced the importance of designing around people's actual behaviours rather than forcing them into predefined categories — a person is not always just a buyer or a seller. The biggest lesson was that flexibility doesn't have to come at the expense of simplicity: a product can support many needs and still feel like one coherent experience.",
+      },
+    ],
     gallery: [
       servaSearchMap,
       servaItemDetails,
@@ -481,7 +545,8 @@ const projects = [
     to: "#553c9a",
     logoTone: "light",
     image: unwindImage,
-    external: "",
+    external:
+      "https://www.behance.net/gallery/254168201/A-Semi-Realistic-Character-Illustration-Visual-Story",
     year: "",
     role: "Brand Designer",
     overview:
@@ -622,6 +687,15 @@ function Nav({ current = "home" }) {
         >
           Contact
         </a>
+        <a
+          href="/Helen-Agbro-CV.docx"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-cv"
+          onClick={close}
+        >
+          CV
+        </a>
       </nav>
 
       <div className="nav-right">
@@ -649,6 +723,9 @@ const SLIDE_MS = 7000;
 
 function TestimonialSlider() {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const heldRef = useRef(false);
+  const holdTimer = useRef(null);
   const count = testimonials.length;
   const item = testimonials[index];
   /* The second avatar circle is the author's company logo, so fall back to
@@ -663,8 +740,31 @@ function TestimonialSlider() {
       className="testimonial-card"
       role="button"
       tabIndex={0}
-      aria-label={`Testimonial ${index + 1} of ${count} — show the next one`}
-      onClick={next}
+      aria-label={`Testimonial ${index + 1} of ${count}. Click for the next one, or press and hold to pause.`}
+      onPointerDown={() => {
+        heldRef.current = false;
+        holdTimer.current = window.setTimeout(() => {
+          heldRef.current = true;
+          setPaused(true);
+        }, 180);
+      }}
+      onPointerUp={() => {
+        window.clearTimeout(holdTimer.current);
+        setPaused(false);
+      }}
+      onPointerLeave={() => {
+        window.clearTimeout(holdTimer.current);
+        setPaused(false);
+      }}
+      onClick={() => {
+        /* A press-and-hold pauses so the quote can be read — don't also
+           skip to the next one when the press is released. */
+        if (heldRef.current) {
+          heldRef.current = false;
+          return;
+        }
+        next();
+      }}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
@@ -687,7 +787,10 @@ function TestimonialSlider() {
             {i === index && (
               <span
                 className="t-fill"
-                style={{ animationDuration: `${SLIDE_MS}ms` }}
+                style={{
+                  animationDuration: `${SLIDE_MS}ms`,
+                  animationPlayState: paused ? "paused" : "running",
+                }}
                 onAnimationEnd={next}
               />
             )}
