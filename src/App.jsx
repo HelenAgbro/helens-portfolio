@@ -24,6 +24,14 @@ import rationCase5 from "./assets/ration-case-5.jpg";
 import rationCase6 from "./assets/ration-case-6.jpg";
 import rationProcess from "./assets/ration-design-process.png";
 
+/* ServaMarket case-study gallery (src/assets) */
+import servaSearchMap from "./assets/servamarket-search-map.jpg";
+import servaItemDetails from "./assets/servamarket-item-details.jpg";
+import servaPostListing from "./assets/servamarket-post-listing.jpg";
+import servaWallet from "./assets/servamarket-wallet.jpg";
+import servaDashboard from "./assets/servamarket-dashboard.jpg";
+import servaAnalytics from "./assets/servamarket-analytics.jpg";
+
 /* =========================================================================
    ✏️  EDIT YOUR CONTENT HERE
    Your name, role, headline, email, skills, testimonial and projects all
@@ -366,7 +374,14 @@ const projects = [
     overview:
       "✏️ Write 2–3 sentences about Servamarket — what the project was, your role and the outcome.",
     sections: [],
-    gallery: [],
+    gallery: [
+      servaSearchMap,
+      servaItemDetails,
+      servaPostListing,
+      servaWallet,
+      servaDashboard,
+      servaAnalytics,
+    ],
   },
   {
     slug: "easy-migrate",
