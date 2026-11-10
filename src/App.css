@@ -115,20 +115,29 @@
   opacity: 1;
 }
 
-/* CV link in the header — opens the PDF resume in a new tab */
+/* CV link in the header — opens the PDF resume in a new tab.
+   Styled like the site's other buttons (solid ink pill → accent on hover). */
 .nav-links a.nav-cv {
-  padding: 0.3rem 0.85rem;
-  border: 1px dashed var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 1rem;
   border-radius: 999px;
-  opacity: 0.85;
-  transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.92rem;
+  opacity: 1;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.nav-links a.nav-cv svg {
+  width: 13px;
+  height: 13px;
 }
 
 .nav-links a.nav-cv:hover {
-  opacity: 1;
-  border-style: solid;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--accent);
+  transform: translateY(-2px);
 }
 
 .nav-right {
@@ -1707,6 +1716,25 @@
 
   .nav-links a:last-child {
     border-bottom: none;
+  }
+
+  /* In the mobile menu the CV link behaves like the other rows */
+  .nav-links a.nav-cv {
+    padding: 0.8rem 0;
+    border-radius: 0;
+    background: none;
+    color: inherit;
+    transform: none;
+  }
+
+  .nav-links a.nav-cv:hover {
+    background: none;
+    transform: none;
+  }
+
+  .nav-links a.nav-cv svg {
+    width: 12px;
+    height: 12px;
   }
 
   .menu-toggle {

@@ -695,6 +695,7 @@ function Nav({ current = "home" }) {
           onClick={close}
         >
           CV
+          <ArrowIcon />
         </a>
       </nav>
 
