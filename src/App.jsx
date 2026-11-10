@@ -688,7 +688,7 @@ function Nav({ current = "home" }) {
           Contact
         </a>
         <a
-          href="/Helen-Agbro-CV.docx"
+          href="/Helen-Agbro-CV.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="nav-cv"

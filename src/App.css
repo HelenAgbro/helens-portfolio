@@ -115,7 +115,7 @@
   opacity: 1;
 }
 
-/* CV link in the header — opens the PDF/DOCX resume in a new tab */
+/* CV link in the header — opens the PDF resume in a new tab */
 .nav-links a.nav-cv {
   padding: 0.3rem 0.85rem;
   border: 1px dashed var(--ink);
