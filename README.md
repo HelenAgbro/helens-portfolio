@@ -65,7 +65,50 @@ skills, testimonial and project entries.
 - Both sub-pages use a tiny hash router — no router library. The dot grid,
   CTA particles and the giant CONTACT word are shared across all three
   views, mirroring the inspiration site.
-- Colours and shared sizes live in `:root` variables in `src/index.css`.
+- Colours and shared sizes live in `:root` variables in `src/index.css`
+  (see **Themes, glow and the cursor eyes** below).
+
+## Themes, glow and the cursor eyes
+
+Three themes ship with the site, switched from the palette pill in the nav
+(next to the clock): **Paper** (the warm cream default), **Blossom** (soft
+rose) and **Dusk** (night). The choice is saved to `localStorage`
+(`helen-portfolio-theme`) and applied to `<html data-theme="…">` by a tiny
+inline script in `index.html` before the first paint, so there is no flash;
+first-time visitors get Dusk automatically when their OS is in dark mode.
+
+Every colour the page paints is a token in `src/index.css`:
+
+| Token | Used for |
+| --- | --- |
+| `--bg`, `--surface`, `--field` | page, cards/menus, form fields |
+| `--ink`, `--muted`, `--ghost` | text, dim text, faint text |
+| `--line`, `--line-strong`, `--border`, `--dots` | dashed rules, hover borders, dot grid |
+| `--chip`, `--track` | skill chips, testimonial progress track |
+| `--btn-bg`, `--btn-ink`, `--btn-border` | the ink pills (CTA, CV, plan, submit) |
+| `--accent`, `--accent-deep` | bright accent, and the readable version for text |
+| `--glow-1/2/3`, `--glow-halo`, `--glow-warm-1/2` | the whimsical glow trio |
+
+The accent trio is periwinkle (`--glow-1`), bubblegum (`--glow-2`) and mint
+(`--glow-3`). Add a theme by copying a `[data-theme="…"]` block in
+`src/index.css` and listing it in the `themes` array in `src/App.jsx` (the
+array also holds the swatch colours the menu previews).
+
+**Glowing buttons** — the pills (`.btn-discuss`, `.nav-cv`, `.plan-cta`,
+`.contact-submit`) hold two clipped layers behind their label: a slow conic
+swirl of the accent trio (`.btn-discuss::before`) and a light streak that
+slides across (`::after`). Hovering fades the swirl in, starts it rotating
+and blooms a halo via `box-shadow` — the label always paints on top, so it
+stays readable. The `:focus-visible` state gets the same treatment for
+keyboard users, and everything is skipped under
+`prefers-reduced-motion: reduce`.
+
+**Cursor eyes** — `PointerEyes` in `src/App.jsx` renders a pair of eyes
+that trail the pointer, lean into the direction of travel, look at where
+you're heading (pupils aim from the eye to the pointer) and blink every few
+seconds. A `requestAnimationFrame` loop writes transforms straight to the
+DOM, so it never re-renders React. They only show for fine pointers
+(mouse/trackpad) and are hidden for reduced motion.
 
 ## Fonts
 

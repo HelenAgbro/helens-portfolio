@@ -250,6 +250,19 @@ const socials = [
   { label: "Behance", url: "https://www.behance.net/helenagbro01" },
 ];
 
+/* ---- Themes (the palette pill in the nav) -------------------------------
+   Each entry is the id written to <html data-theme="…"> plus the swatch
+   colours previewed in the menu. The actual palette lives in
+   src/index.css as a matching [data-theme="…"] block — add one there and
+   list it here to add another theme. */
+const themes = [
+  { id: "paper", label: "Paper", swatch: "#f2f1ec", accent: "#7c5cff" },
+  { id: "blossom", label: "Blossom", swatch: "#fdf1f7", accent: "#e0399b" },
+  { id: "dusk", label: "Dusk", swatch: "#14111f", accent: "#b79cff" },
+];
+
+const THEME_KEY = "helen-portfolio-theme";
+
 /* Each project becomes a card — clicking it opens a case-study page at
    #/project/<slug> … unless "external" has a URL (e.g. a Behance case
    study), then the card opens that link in a new tab instead.
@@ -609,6 +622,23 @@ function ArrowIcon() {
   );
 }
 
+/* Chevron used by the theme pill */
+function CaretIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  );
+}
+
 /* @@NEXT1@@ */
 
 /* =========================================================================
@@ -660,8 +690,222 @@ function Clock() {
   return <span className="clock">{label}</span>;
 }
 
+/* ---- Theme state -------------------------------------------------------
+   Reads the saved choice (the inline script in index.html already applied
+   it before first paint, so there is no flash), falling back to the OS
+   preference. Every change is mirrored onto <html data-theme> and saved. */
+function readInitialTheme() {
+  try {
+    const saved = window.localStorage.getItem(THEME_KEY);
+    if (saved && themes.some((item) => item.id === saved)) return saved;
+  } catch {
+    /* localStorage can be blocked (private mode) — just use the OS setting */
+  }
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dusk"
+    : "paper";
+}
+
+function useTheme() {
+  const [theme, setTheme] = useState(readInitialTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      window.localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      /* ignore — the theme still applies for this visit */
+    }
+  }, [theme]);
+
+  return [theme, setTheme];
+}
+
+/* ---- Theme switcher: palette pill + popover menu of the three themes ---- */
+function ThemeSwitcher({ theme, onChange }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef(null);
+  const active = themes.find((item) => item.id === theme) || themes[0];
+
+  /* Close on outside click or Escape */
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (event) => {
+      if (!wrapRef.current?.contains(event.target)) setOpen(false);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <div className="theme-switch" ref={wrapRef}>
+      <button
+        type="button"
+        className="theme-toggle"
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-label={`Theme: ${active.label}. Choose a theme.`}
+        onClick={() => setOpen((value) => !value)}
+      >
+        <span className="theme-toggle-dot" aria-hidden="true" />
+        <span className="theme-toggle-label">{active.label}</span>
+        <CaretIcon />
+      </button>
+
+      {open && (
+        <div className="theme-menu" role="menu" aria-label="Choose a theme">
+          {themes.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              role="menuitemradio"
+              aria-checked={item.id === theme}
+              className={
+                item.id === theme ? "theme-option is-active" : "theme-option"
+              }
+              onClick={() => {
+                onChange(item.id);
+                setOpen(false);
+              }}
+            >
+              <span
+                className="theme-swatch"
+                aria-hidden="true"
+                style={{
+                  background: item.swatch,
+                  boxShadow: `0 0 0 1px ${item.accent} inset, 0 0 10px -3px ${item.accent}`,
+                }}
+              />
+              {item.label}
+              {item.id === theme && (
+                <span className="theme-check" aria-hidden="true">
+                  ✓
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ---- Whimsical cursor companion ---------------------------------------
+   Two little eyes trail the pointer, lean into the direction of travel,
+   look where you're heading and blink now and then. The loop writes
+   transforms straight to the DOM (no re-renders) and bows out on touch
+   screens and for anyone who prefers reduced motion. */
+function PointerEyes() {
+  const wrapRef = useRef(null);
+  const leftPupil = useRef(null);
+  const rightPupil = useRef(null);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    let pointerX = -400;
+    let pointerY = -400;
+    let x = pointerX;
+    let y = pointerY;
+    let lean = 0;
+    let visible = false;
+    let blinkAt = 0;
+    let blinkTimer = 0;
+    let frame = 0;
+
+    const follow = (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!visible) {
+        visible = true;
+        x = pointerX;
+        y = pointerY;
+        wrap.classList.add("is-on");
+      }
+    };
+
+    const hide = () => {
+      visible = false;
+      wrap.classList.remove("is-on");
+    };
+
+    const tick = (now) => {
+      frame = requestAnimationFrame(tick);
+
+      /* Springy follow — the pair always lags a little behind the pointer,
+         which is what makes the pupils look "ahead" of the movement */
+      x += (pointerX - x) * 0.14;
+      y += (pointerY - y) * 0.14;
+
+      /* Lean into the direction of travel, like a curious head tilt */
+      const drift = pointerX - x;
+      lean += (Math.max(-16, Math.min(16, drift * 0.35)) - lean) * 0.1;
+
+      wrap.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${lean.toFixed(2)}deg) translate(-50%, -200%)`;
+
+      /* Pupils point from the eye toward the pointer */
+      const dx = pointerX - x;
+      const dy = pointerY - y;
+      const distance = Math.hypot(dx, dy) || 1;
+      const reach = Math.min(4, distance * 0.06);
+      const gaze = `translate(-50%, -50%) translate(${((dx / distance) * reach).toFixed(2)}px, ${((dy / distance) * reach).toFixed(2)}px)`;
+      if (leftPupil.current) leftPupil.current.style.transform = gaze;
+      if (rightPupil.current) rightPupil.current.style.transform = gaze;
+
+      /* A blink every few seconds */
+      if (now > blinkAt) {
+        wrap.classList.add("is-blinking");
+        window.clearTimeout(blinkTimer);
+        blinkTimer = window.setTimeout(
+          () => wrap.classList.remove("is-blinking"),
+          140,
+        );
+        blinkAt = now + 2600 + Math.random() * 4200;
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    window.addEventListener("pointermove", follow, { passive: true });
+    document.addEventListener("pointerleave", hide);
+    window.addEventListener("blur", hide);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.clearTimeout(blinkTimer);
+      window.removeEventListener("pointermove", follow);
+      document.removeEventListener("pointerleave", hide);
+      window.removeEventListener("blur", hide);
+    };
+  }, []);
+
+  return (
+    <div ref={wrapRef} className="pointer-eyes" aria-hidden="true">
+      <span className="pe-eye">
+        <span ref={leftPupil} className="pe-pupil" />
+        <span className="pe-shine" />
+      </span>
+      <span className="pe-eye">
+        <span ref={rightPupil} className="pe-pupil" />
+        <span className="pe-shine" />
+      </span>
+    </div>
+  );
+}
+
 /* ---- Top navigation bar ---- */
-function Nav({ current = "home" }) {
+function Nav({ current = "home", theme, onThemeChange }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
@@ -711,6 +955,7 @@ function Nav({ current = "home" }) {
       </nav>
 
       <div className="nav-right">
+        <ThemeSwitcher theme={theme} onChange={onThemeChange} />
         <Clock />
         <button
           type="button"
@@ -1435,6 +1680,7 @@ function useHashRoute() {
 
 export default function App() {
   const hash = useHashRoute();
+  const [theme, setTheme] = useTheme();
   const projectMatch = hash.match(/^#\/project\/([^/?#]+)/);
   /* Projects with an external URL (Behance) have no case-study page, so a
      direct #/project/<slug> link to one falls back to the home view. */
@@ -1475,7 +1721,7 @@ export default function App() {
 
   return (
     <div id="top" className="page">
-      <Nav current={view} />
+      <Nav current={view} theme={theme} onThemeChange={setTheme} />
       <div className="layout">
         <Sidebar />
         <main className="content">
@@ -1496,6 +1742,8 @@ export default function App() {
           </div>
         </main>
       </div>
+      {/* Mounted once, above everything — the eyes follow the pointer */}
+      <PointerEyes />
     </div>
   );
 }

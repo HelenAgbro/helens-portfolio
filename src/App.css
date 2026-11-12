@@ -32,7 +32,7 @@
   gap: 2rem;
   height: var(--nav-h);
   padding: 0 1.5rem;
-  background: rgba(242, 241, 236, 0.9);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
@@ -74,8 +74,8 @@
   gap: 0.5rem;
   height: var(--nav-h);
   padding: 0 1.25rem;
-  border-left: 1px dashed rgba(0, 0, 0, 0.15);
-  border-right: 1px dashed rgba(0, 0, 0, 0.15);
+  border-left: 1px dashed var(--line);
+  border-right: 1px dashed var(--line);
   font-size: 0.9rem;
   white-space: nowrap;
 }
@@ -123,11 +123,11 @@
   gap: 0.4rem;
   padding: 0.35rem 1rem;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
   font-size: 0.92rem;
   opacity: 1;
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .nav-links a.nav-cv svg {
@@ -136,7 +136,6 @@
 }
 
 .nav-links a.nav-cv:hover {
-  background: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -201,7 +200,7 @@
   display: flex;
   flex-direction: column;
   padding: 1.75rem 1.75rem 1.5rem;
-  border-right: 1px dashed #d9d4c9;
+  border-right: 1px dashed var(--line);
 }
 
 .sidebar::-webkit-scrollbar {
@@ -211,7 +210,7 @@
 .side-block + .side-block {
   margin-top: 1.25rem;
   padding-top: 1.25rem;
-  border-top: 1px dashed #d9d4c9;
+  border-top: 1px dashed var(--line);
 }
 
 /* The "Kind words" slider sits directly on the page — no divider above it */
@@ -230,9 +229,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Ccircle%20cx='24'%20cy='24'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='72'%20cy='24'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='24'%20cy='72'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='72'%20cy='72'%20r='4'%20fill='%2317130e'/%3E%3C/svg%3E");
-  background-size: 24px 24px;
-  opacity: 0.15;
+  background-image: radial-gradient(var(--dots) 1.1px, transparent 1.6px);
+  background-size: 12px 12px;
   pointer-events: none;
 }
 
@@ -247,7 +245,7 @@
   margin-bottom: 1.1rem;
   padding: 0.45rem 1.1rem;
   border-radius: 999px;
-  background: #e9e6de;
+  background: var(--chip);
   font-size: 0.88rem;
   font-weight: 400;
 }
@@ -262,7 +260,7 @@
 }
 
 .headline .muted {
-  color: #b7b1a4;
+  color: var(--ghost);
 }
 
 /* Floating blurred particle specks around the CTA — mirrors the
@@ -283,7 +281,7 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: rgba(23, 19, 14, 0.3);
+  background: var(--ink-dim);
   filter: blur(6px);
   animation: cta-float 8s ease-in-out infinite;
 }
@@ -315,16 +313,15 @@
   gap: 0.6rem;
   padding: 0.8rem 1.4rem;
   border-radius: 999px;
-  background: var(--ink);
-  color: #fff;
+  background: var(--btn-bg);
+  color: var(--btn-ink);
   font-size: 0.95rem;
   font-weight: 400;
   letter-spacing: -0.03em;
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .btn-discuss:hover {
-  background: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -338,9 +335,10 @@
 .dotted {
   height: 64px;
   margin-top: 1.5rem;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='96'%20height='96'%3E%3Ccircle%20cx='24'%20cy='24'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='72'%20cy='24'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='24'%20cy='72'%20r='4'%20fill='%2317130e'/%3E%3Ccircle%20cx='72'%20cy='72'%20r='4'%20fill='%2317130e'/%3E%3C/svg%3E");
-  background-size: 24px 24px;
-  opacity: 0.15;
+  /* 12px dot grid painted from the theme's --dots token so it follows the
+     theme (was a hard-coded inline SVG tile) */
+  background-image: radial-gradient(var(--dots) 1.1px, transparent 1.6px);
+  background-size: 12px 12px;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000);
   mask-image: linear-gradient(to bottom, transparent, #000);
 }
@@ -414,7 +412,7 @@
   flex: none;
   padding: 0.4rem 1rem;
   border-radius: 999px;
-  background: #e9e6de;
+  background: var(--chip);
   font-size: 0.9rem;
   white-space: nowrap;
 }
@@ -461,11 +459,11 @@
   position: relative;
   flex: 1;
   overflow: hidden;
-  background: rgba(8, 8, 8, 0.15);
+  background: var(--track);
 }
 
 .t-seg.is-done {
-  background: #212121;
+  background: var(--ink);
 }
 
 .t-fill {
@@ -474,7 +472,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #212121;
+  background: var(--ink);
   animation-name: t-fill;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -514,7 +512,7 @@
   font-size: 1.125rem;
   line-height: 1.4;
   letter-spacing: -0.04em;
-  color: #0f0f0f;
+  color: var(--ink);
 }
 
 .quote-dots {
@@ -531,7 +529,7 @@
   width: 100%;
   max-width: 280px;
   font-size: 0.9375rem;
-  color: #000;
+  color: var(--ink);
 }
 
 /* Overlapping avatar pair — the author's photo with their company's logo */
@@ -588,7 +586,7 @@
 
 .author-role {
   font-size: 0.8125rem;
-  color: rgba(8, 8, 8, 0.6);
+  color: var(--muted);
 }
 
 /* ---------------- Right column (scrolling) ---------------- */
@@ -623,12 +621,16 @@
   letter-spacing: -0.02em;
   color: var(--muted);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.3s ease;
 }
 
 .projects-tab:hover {
   color: var(--ink);
-  border-color: #c9c3b6;
+  border-color: var(--line-strong);
 }
 
 .projects-tab.is-active {
@@ -778,9 +780,10 @@
   aspect-ratio: 1456 / 816;
   transform: translate(-50%, -50%) rotate(155deg);
   border-radius: 50%;
+  /* Themeable halo behind the word (was a warm cream/orange glow) */
   background:
-    radial-gradient(55% 48% at 50% 40%, rgba(252, 236, 208, 0.95), rgba(252, 236, 208, 0) 72%),
-    radial-gradient(80% 75% at 52% 62%, rgba(240, 170, 90, 0.85), rgba(240, 170, 90, 0) 78%);
+    radial-gradient(55% 48% at 50% 40%, var(--glow-warm-1), transparent 72%),
+    radial-gradient(80% 75% at 52% 62%, var(--glow-warm-2), transparent 78%);
   filter: blur(48px);
   opacity: 0.4;
   transition: opacity 0.3s ease;
@@ -809,8 +812,8 @@
   white-space: nowrap;
   display: inline-block;
   background-image: linear-gradient(
-    rgba(23, 19, 14, 0.15) 0%,
-    rgba(23, 19, 14, 0) 76%
+    var(--ink-fade) 0%,
+    transparent 76%
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -829,9 +832,9 @@
   width: clamp(44px, 6vw, 84px);
   height: clamp(44px, 6vw, 84px);
   border-radius: 50%;
-  background: var(--ink);
-  color: var(--bg);
-  box-shadow: 0 10px 24px rgba(23, 19, 14, 0.25);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  box-shadow: 0 10px 24px var(--shadow);
   opacity: 0;
   transform: translate(14px, -50%) scale(0.85);
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -971,7 +974,7 @@
   background-image: linear-gradient(
     to bottom,
     var(--ink) var(--fill, 100%),
-    rgba(23, 19, 14, 0.22) var(--fill, 100%)
+    var(--ink-dim) var(--fill, 100%)
   );
   background-clip: text;
   -webkit-background-clip: text;
@@ -1121,9 +1124,9 @@
   right: 1.25rem;
   padding: 0.3rem 0.75rem;
   border-radius: 999px;
-  background: #a2ff94;
+  background: var(--flag-bg);
   font-size: 0.75rem;
-  color: var(--ink);
+  color: var(--flag-ink);
 }
 
 .plan-name {
@@ -1175,14 +1178,13 @@
   margin-top: auto;
   padding: 0.65rem 1.3rem;
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
   font-size: 0.92rem;
-  transition: background 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .plan-cta:hover {
-  background: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -1216,7 +1218,7 @@
 }
 
 .faq-item summary:hover {
-  color: var(--accent);
+  color: var(--accent-deep);
 }
 
 .faq-plus {
@@ -1344,8 +1346,8 @@
 }
 
 .case-meta-link:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--accent-deep);
+  border-color: var(--accent-deep);
 }
 
 .case-hero {
@@ -1442,7 +1444,7 @@
 }
 
 .case-next:hover {
-  border-color: #c9c3b6;
+  border-color: var(--line-strong);
   background: var(--surface);
 }
 
@@ -1503,7 +1505,7 @@
   padding: 0.85rem 1rem;
   border: 1px solid var(--border);
   border-radius: 12px;
-  background: #f2f1ee;
+  background: var(--field);
   color: var(--ink);
   transition: border-color 0.2s ease, background 0.2s ease;
 }
@@ -1528,20 +1530,19 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.8rem 1.6rem;
-  border: 1px solid rgb(99, 99, 99);
+  border: 1px solid var(--btn-border);
   border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
   font: inherit;
   font-size: 0.95rem;
   letter-spacing: -0.03em;
   cursor: pointer;
-  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 .contact-submit:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  border-color: transparent;
   transform: translateY(-2px);
 }
 
@@ -1564,8 +1565,8 @@
 }
 
 .contact-email:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+  color: var(--accent-deep);
+  border-color: var(--accent-deep);
 }
 
 .contact-socials {
@@ -1587,18 +1588,393 @@
   border-radius: 999px;
   font-size: 0.92rem;
   color: var(--muted);
-  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
 }
 
 .social-link:hover {
   color: var(--ink);
-  border-color: #c9c3b6;
+  border-color: var(--line-strong);
   transform: translateY(-2px);
 }
 
 .social-link svg {
   width: 14px;
   height: 14px;
+}
+
+/* =========================================================================
+   Glowing buttons — the ink pill holds a glowing substance that starts
+   flowing on hover: the theme's three accent hues (periwinkle, bubblegum,
+   mint) swirl inside the pill, a soft sheen slides across it and a halo
+   blooms around it. Both layers sit *behind* the label (negative z-index
+   inside the button's own stacking context), so the text never washes out,
+   and everything is clipped to the pill by overflow: hidden.
+   ========================================================================= */
+
+.btn-discuss,
+.nav-links a.nav-cv,
+.plan-cta,
+.contact-submit {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.35s ease,
+    border-color 0.25s ease;
+}
+
+/* The flowing substance */
+.btn-discuss::before,
+.nav-links a.nav-cv::before,
+.plan-cta::before,
+.contact-submit::before {
+  content: "";
+  position: absolute;
+  inset: -160%;
+  z-index: -1;
+  border-radius: 50%;
+  /* Ink veil over the swirl keeps the label readable on every hue */
+  background:
+    linear-gradient(rgba(12, 8, 22, 0.42), rgba(12, 8, 22, 0.42)),
+    conic-gradient(
+      from 0deg,
+      var(--glow-1),
+      var(--glow-2),
+      var(--glow-3),
+      var(--glow-2),
+      var(--glow-1)
+    );
+  filter: blur(7px) saturate(1.2);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  animation: glow-swirl 7s linear infinite;
+  animation-play-state: paused;
+}
+
+/* A streak of light that slides through the glow */
+.btn-discuss::after,
+.nav-links a.nav-cv::after,
+.plan-cta::after,
+.contact-submit::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  z-index: -1;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  transform: translateX(-160%) skewX(-18deg);
+  opacity: 0;
+}
+
+.btn-discuss:hover::before,
+.btn-discuss:focus-visible::before,
+.nav-links a.nav-cv:hover::before,
+.nav-links a.nav-cv:focus-visible::before,
+.plan-cta:hover::before,
+.plan-cta:focus-visible::before,
+.contact-submit:hover::before,
+.contact-submit:focus-visible::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+.btn-discuss:hover::after,
+.btn-discuss:focus-visible::after,
+.nav-links a.nav-cv:hover::after,
+.nav-links a.nav-cv:focus-visible::after,
+.plan-cta:hover::after,
+.plan-cta:focus-visible::after,
+.contact-submit:hover::after,
+.contact-submit:focus-visible::after {
+  opacity: 1;
+  animation: glow-sheen 2.4s ease-in-out infinite;
+}
+
+/* The bloom around the pill */
+.btn-discuss:hover,
+.btn-discuss:focus-visible,
+.nav-links a.nav-cv:hover,
+.nav-links a.nav-cv:focus-visible,
+.plan-cta:hover,
+.plan-cta:focus-visible,
+.contact-submit:hover,
+.contact-submit:focus-visible {
+  box-shadow:
+    0 0 0 1px var(--glow-3) inset,
+    0 10px 26px -14px var(--glow-2),
+    0 0 30px -6px var(--glow-halo);
+}
+
+@keyframes glow-swirl {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes glow-sheen {
+  0% {
+    transform: translateX(-160%) skewX(-18deg);
+  }
+
+  60%,
+  100% {
+    transform: translateX(360%) skewX(-18deg);
+  }
+}
+
+/* Round chip on the giant "Contact" word picks up the same bloom */
+.contact-link:hover .contact-arrow,
+.contact-link:focus-visible .contact-arrow {
+  box-shadow:
+    0 0 0 1px var(--glow-3) inset,
+    0 10px 26px -12px var(--glow-2),
+    0 0 34px -6px var(--glow-halo);
+}
+
+/* Outline pills (filter tabs, social links) get a gentle halo rather than
+   the inner swirl — their labels sit on the page background, so the glow
+   stays outside the pill */
+.projects-tab:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 18px -6px var(--glow-halo);
+}
+
+.projects-tab.is-active {
+  box-shadow: 0 6px 20px -10px var(--glow-halo);
+}
+
+.social-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 18px -8px var(--glow-halo);
+}
+
+/* =========================================================================
+   Whimsical cursor companion — a pair of little eyes that trail the
+   pointer, lean into the direction of travel, look at where you're heading
+   and blink now and then. Desktop pointers only, and off for reduced
+   motion (the component also skips its animation loop in that case).
+   ========================================================================= */
+
+.pointer-eyes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  display: none;
+  gap: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: transform;
+}
+
+@media (pointer: fine) {
+  .pointer-eyes {
+    display: flex;
+  }
+}
+
+.pointer-eyes.is-on {
+  opacity: 1;
+}
+
+/* Soft aura behind the pair */
+.pointer-eyes::before {
+  content: "";
+  position: absolute;
+  inset: -16px -18px;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, var(--glow-halo), transparent 76%);
+  filter: blur(8px);
+  opacity: 0.8;
+}
+
+.pe-eye {
+  position: relative;
+  display: block;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: #fffdf7;
+  box-shadow:
+    0 2px 6px rgba(10, 6, 20, 0.28),
+    0 0 0 1px rgba(10, 6, 20, 0.12) inset;
+  transform-origin: 50% 55%;
+  transition: transform 0.12s ease;
+}
+
+/* Blink: squash the sclera for a beat */
+.pointer-eyes.is-blinking .pe-eye {
+  transform: scaleY(0.12);
+}
+
+.pe-pupil {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #17131f;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.pe-shine {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.9;
+}
+
+/* =========================================================================
+   Theme switcher — a palette pill in the nav that opens a small menu of
+   the three themes (each swatch previews its own background + accent)
+   ========================================================================= */
+
+.theme-switch {
+  position: relative;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.34rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.85rem;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 0 18px -8px var(--glow-halo);
+}
+
+.theme-toggle-dot {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 140deg,
+    var(--glow-1),
+    var(--glow-2),
+    var(--glow-3),
+    var(--glow-1)
+  );
+  box-shadow: 0 0 10px -2px var(--glow-halo);
+}
+
+.theme-toggle svg {
+  width: 11px;
+  height: 11px;
+  opacity: 0.6;
+  transition: transform 0.25s ease;
+}
+
+.theme-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.theme-toggle-label {
+  display: none;
+}
+
+.theme-menu {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  z-index: 130;
+  display: grid;
+  gap: 0.1rem;
+  min-width: 176px;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow:
+    0 18px 40px -24px var(--shadow),
+    0 0 22px -14px var(--glow-halo),
+    0 0 0 1px var(--border);
+  animation: theme-menu-in 0.18s ease both;
+}
+
+@keyframes theme-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.18s ease;
+}
+
+.theme-option:hover,
+.theme-option:focus-visible {
+  background: var(--chip);
+}
+
+.theme-option.is-active {
+  background: var(--chip);
+}
+
+.theme-swatch {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--border) inset;
+}
+
+.theme-check {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+@media (min-width: 700px) {
+  .theme-toggle-label {
+    display: inline;
+  }
 }
 
 /* Reveal-on-scroll motion */
@@ -1634,9 +2010,28 @@
   .projects-tab,
   .contact-glow,
   .contact-arrow,
-  .status-dot {
+  .status-dot,
+  .pe-eye,
+  .theme-menu {
     transition: none;
     animation: none;
+  }
+
+  /* The button glow is motion; keep the readable hover state only */
+  .btn-discuss::before,
+  .nav-links a.nav-cv::before,
+  .plan-cta::before,
+  .contact-submit::before,
+  .btn-discuss::after,
+  .nav-links a.nav-cv::after,
+  .plan-cta::after,
+  .contact-submit::after {
+    animation: none;
+    display: none;
+  }
+
+  .pointer-eyes {
+    display: none;
   }
 
   /* The fill animation is what advances the slider, so without it the
@@ -1678,7 +2073,7 @@
     height: auto;
     overflow: visible;
     border-right: none;
-    border-bottom: 1px dashed #d9d4c9;
+    border-bottom: 1px dashed var(--line);
   }
 
   .status {
@@ -1732,6 +2127,18 @@
     transform: none;
   }
 
+  /* In the mobile menu the CV row sits on the page background, so it keeps
+     the plain row treatment instead of the inner glow */
+  .nav-links a.nav-cv::before,
+  .nav-links a.nav-cv::after {
+    display: none;
+  }
+
+  .nav-links a.nav-cv:hover,
+  .nav-links a.nav-cv:focus-visible {
+    box-shadow: none;
+  }
+
   .nav-links a.nav-cv svg {
     width: 12px;
     height: 12px;
@@ -1745,6 +2152,11 @@
 @media (max-width: 640px) {
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Keep the nav from crowding on small phones: the clock steps aside */
+  .clock {
+    display: none;
   }
 
   .content {

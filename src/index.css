@@ -42,13 +42,17 @@
   font-display: swap;
 }
 
+/* ---- Theme tokens -------------------------------------------------------
+   Three themes, switched from the palette button in the nav (the theme id
+   lives on <html data-theme="…">, so one attribute re-skins the page):
+     paper   — the warm cream default
+     blossom — a soft rose afternoon
+     dusk    — the night version
+   Every colour below is themeable; nothing in App.css hard-codes a page
+   colour any more. The last block is the whimsical accent trio — periwinkle,
+   bubblegum and mint — used for the glow that flows through the buttons and
+   for the eyes that follow the cursor.                                     */
 :root {
-  --bg: #f2f1ec;
-  --surface: #faf9f6;
-  --ink: #17130e;
-  --muted: #6f6a63;
-  --accent: #e2602b;
-  --border: #e0ddd4;
   --nav-h: 64px;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -57,6 +61,139 @@
      is calibrated to Agrandir's metrics, so swapping it would resize the word. */
   --font-word: 'Agrandir Regular', 'Inter', sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Fallback (paper) in case the attribute is missing for any reason */
+  color-scheme: light;
+  --bg: #f2f1ec;
+  --surface: #faf9f6;
+  --ink: #17130e;
+  --muted: #6f6a63;
+  --border: #e0ddd4;
+  --line: #d9d4c9;
+  --line-strong: #c9c3b6;
+  --chip: #e9e6de;
+  --ghost: #b7b1a4;
+  --field: #f2f1ee;
+  --nav-bg: rgba(242, 241, 236, 0.9);
+  --dots: rgba(23, 19, 14, 0.15);
+  --ink-dim: rgba(23, 19, 14, 0.22);
+  --ink-fade: rgba(23, 19, 14, 0.15);
+  --track: rgba(8, 8, 8, 0.15);
+  --shadow: rgba(23, 19, 14, 0.25);
+  --btn-bg: #17130e;
+  --btn-ink: #fffdf8;
+  --btn-border: #3c362d;
+  --flag-bg: #cdfbc6;
+  --flag-ink: #17130e;
+  --accent: #7c5cff;
+  --accent-deep: #6440d8;
+  --glow-1: #7c5cff;
+  --glow-2: #ff7ad9;
+  --glow-3: #5fe3c0;
+  --glow-halo: rgba(124, 92, 255, 0.45);
+  --glow-warm-1: rgba(214, 204, 255, 0.95);
+  --glow-warm-2: rgba(255, 186, 232, 0.85);
+}
+
+:root[data-theme='paper'] {
+  color-scheme: light;
+  --bg: #f2f1ec;
+  --surface: #faf9f6;
+  --ink: #17130e;
+  --muted: #6f6a63;
+  --border: #e0ddd4;
+  --line: #d9d4c9;
+  --line-strong: #c9c3b6;
+  --chip: #e9e6de;
+  --ghost: #b7b1a4;
+  --field: #f2f1ee;
+  --nav-bg: rgba(242, 241, 236, 0.9);
+  --dots: rgba(23, 19, 14, 0.15);
+  --ink-dim: rgba(23, 19, 14, 0.22);
+  --ink-fade: rgba(23, 19, 14, 0.15);
+  --track: rgba(8, 8, 8, 0.15);
+  --shadow: rgba(23, 19, 14, 0.25);
+  --btn-bg: #17130e;
+  --btn-ink: #fffdf8;
+  --btn-border: #3c362d;
+  --flag-bg: #cdfbc6;
+  --flag-ink: #17130e;
+  --accent: #7c5cff;
+  --accent-deep: #6440d8;
+  --glow-1: #7c5cff;
+  --glow-2: #ff7ad9;
+  --glow-3: #5fe3c0;
+  --glow-halo: rgba(124, 92, 255, 0.45);
+  --glow-warm-1: rgba(214, 204, 255, 0.95);
+  --glow-warm-2: rgba(255, 186, 232, 0.85);
+}
+
+/* Blossom — dusty rose paper, plum ink, candy glow */
+:root[data-theme='blossom'] {
+  color-scheme: light;
+  --bg: #fdf1f7;
+  --surface: #fff8fb;
+  --ink: #2b1524;
+  --muted: #7f6076;
+  --border: #f2dbe7;
+  --line: #f0d5e3;
+  --line-strong: #e6bcd2;
+  --chip: #fbe3ef;
+  --ghost: #cfa4bd;
+  --field: #fdeaf3;
+  --nav-bg: rgba(253, 241, 247, 0.9);
+  --dots: rgba(43, 21, 36, 0.14);
+  --ink-dim: rgba(43, 21, 36, 0.22);
+  --ink-fade: rgba(43, 21, 36, 0.15);
+  --track: rgba(43, 21, 36, 0.12);
+  --shadow: rgba(80, 24, 60, 0.25);
+  --btn-bg: #2b1524;
+  --btn-ink: #fff8fb;
+  --btn-border: #4a2b3e;
+  --flag-bg: #ffd0e9;
+  --flag-ink: #2b1524;
+  --accent: #e0399b;
+  --accent-deep: #bc2380;
+  --glow-1: #ff5fb0;
+  --glow-2: #ffb26b;
+  --glow-3: #a98bff;
+  --glow-halo: rgba(224, 57, 155, 0.42);
+  --glow-warm-1: rgba(255, 214, 236, 0.95);
+  --glow-warm-2: rgba(255, 196, 150, 0.8);
+}
+
+/* Dusk — night mode */
+:root[data-theme='dusk'] {
+  color-scheme: dark;
+  --bg: #14111f;
+  --surface: #1d1830;
+  --ink: #f5f1ff;
+  --muted: #a79dc6;
+  --border: #302a4b;
+  --line: #2b2544;
+  --line-strong: #463c6b;
+  --chip: #251f3c;
+  --ghost: #5f5680;
+  --field: #1a1529;
+  --nav-bg: rgba(20, 17, 31, 0.85);
+  --dots: rgba(245, 241, 255, 0.16);
+  --ink-dim: rgba(245, 241, 255, 0.26);
+  --ink-fade: rgba(245, 241, 255, 0.18);
+  --track: rgba(245, 241, 255, 0.16);
+  --shadow: rgba(0, 0, 0, 0.5);
+  --btn-bg: #2a2350;
+  --btn-ink: #f7f3ff;
+  --btn-border: #453c77;
+  --flag-bg: #5fe3c0;
+  --flag-ink: #12281f;
+  --accent: #b79cff;
+  --accent-deep: #cbb8ff;
+  --glow-1: #8a6bff;
+  --glow-2: #ff6ec7;
+  --glow-3: #4fe0c0;
+  --glow-halo: rgba(138, 107, 255, 0.5);
+  --glow-warm-1: rgba(126, 100, 224, 0.55);
+  --glow-warm-2: rgba(255, 110, 199, 0.45);
 }
 
 * {
@@ -79,6 +216,13 @@ body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Themes cross-fade instead of snapping */
+  transition: background-color 0.45s ease, color 0.45s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--btn-ink);
 }
 
 h1,
