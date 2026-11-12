@@ -800,10 +800,11 @@ function ThemeSwitcher({ theme, onChange }) {
 }
 
 /* ---- Whimsical cursor companion ---------------------------------------
-   Two little eyes trail the pointer, lean into the direction of travel,
-   look where you're heading and blink now and then. The loop writes
-   transforms straight to the DOM (no re-renders) and bows out on touch
-   screens and for anyone who prefers reduced motion. */
+   Two little eyes appear only while a project card is hovered: they trail
+   the pointer, lean into the direction of travel, look where you're going
+   and blink now and then. The loop writes transforms straight to the DOM
+   (no re-renders) and bows out on touch screens and for anyone who prefers
+   reduced motion. */
 function PointerEyes() {
   const wrapRef = useRef(null);
   const leftPupil = useRef(null);
@@ -825,24 +826,45 @@ function PointerEyes() {
     let blinkTimer = 0;
     let frame = 0;
 
-    const follow = (event) => {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      if (!visible) {
-        visible = true;
-        x = pointerX;
-        y = pointerY;
-        wrap.classList.add("is-on");
-      }
+    /* The eyes only exist while a project card is hovered */
+    const show = () => {
+      if (visible) return;
+      visible = true;
+      x = pointerX;
+      y = pointerY;
+      lean = 0;
+      wrap.classList.add("is-on");
     };
 
     const hide = () => {
+      if (!visible) return;
       visible = false;
       wrap.classList.remove("is-on");
+      wrap.classList.remove("is-blinking");
+    };
+
+    const follow = (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+    };
+
+    const onOver = (event) => {
+      if (event.target?.closest?.(".card")) show();
+    };
+
+    const onOut = (event) => {
+      const card = event.target?.closest?.(".card");
+      if (!card) return;
+      /* ignore moves between elements inside the same card */
+      if (event.relatedTarget instanceof Node && card.contains(event.relatedTarget)) {
+        return;
+      }
+      hide();
     };
 
     const tick = (now) => {
       frame = requestAnimationFrame(tick);
+      if (!visible) return;
 
       /* Springy follow — the pair always lags a little behind the pointer,
          which is what makes the pupils look "ahead" of the movement */
@@ -878,6 +900,8 @@ function PointerEyes() {
 
     frame = requestAnimationFrame(tick);
     window.addEventListener("pointermove", follow, { passive: true });
+    document.addEventListener("pointerover", onOver, true);
+    document.addEventListener("pointerout", onOut, true);
     document.addEventListener("pointerleave", hide);
     window.addEventListener("blur", hide);
 
@@ -885,6 +909,8 @@ function PointerEyes() {
       cancelAnimationFrame(frame);
       window.clearTimeout(blinkTimer);
       window.removeEventListener("pointermove", follow);
+      document.removeEventListener("pointerover", onOver, true);
+      document.removeEventListener("pointerout", onOut, true);
       document.removeEventListener("pointerleave", hide);
       window.removeEventListener("blur", hide);
     };

@@ -94,21 +94,26 @@ The accent trio is periwinkle (`--glow-1`), bubblegum (`--glow-2`) and mint
 `src/index.css` and listing it in the `themes` array in `src/App.jsx` (the
 array also holds the swatch colours the menu previews).
 
-**Glowing buttons** — the pills (`.btn-discuss`, `.nav-cv`, `.plan-cta`,
-`.contact-submit`) hold two clipped layers behind their label: a slow conic
-swirl of the accent trio (`.btn-discuss::before`) and a light streak that
-slides across (`::after`). Hovering fades the swirl in, starts it rotating
-and blooms a halo via `box-shadow` — the label always paints on top, so it
-stays readable. The `:focus-visible` state gets the same treatment for
-keyboard users, and everything is skipped under
-`prefers-reduced-motion: reduce`.
+**Button hover** — measured off the inspiration site: its "Discuss a project"
+pill is a glossy dark bevel whose background simply lightens from
+`rgb(8, 8, 8)` to `rgb(54, 54, 54)` on hover. The pills here do exactly that
+(`--btn-bg` → `--btn-hover`, with the layered inset bevel in `--btn-shadow`),
+plus a single accent-coloured halo (`--glow-halo`) so it still reads as a
+glow and one colourless sweep of light passing through the pill (`.btn-discuss::after`).
+No gradient, no second colour, no movement. The `:focus-visible` state matches
+for keyboard users, and the light sweep is skipped under
+`prefers-reduced-motion: reduce` (the colour/shadow change stays).
 
-**Cursor eyes** — `PointerEyes` in `src/App.jsx` renders a pair of eyes
-that trail the pointer, lean into the direction of travel, look at where
-you're heading (pupils aim from the eye to the pointer) and blink every few
-seconds. A `requestAnimationFrame` loop writes transforms straight to the
-DOM, so it never re-renders React. They only show for fine pointers
-(mouse/trackpad) and are hidden for reduced motion.
+**Cursor eyes** — `PointerEyes` in `src/App.jsx` renders a pair of eyes that
+**only appear while a project card (`.card`) is hovered**: they trail the
+pointer, lean into the direction of travel, look where you're heading (pupils
+aim from the eye to the pointer) and blink every few seconds. Visibility is
+toggled by delegated `pointerover` / `pointerout` on `.card`, and an
+`requestAnimationFrame` loop writes transforms straight to the DOM, so it
+never re-renders React. Hidden for coarse pointers (touch) and reduced motion.
+
+**Favicon** — `public/favicon.svg` is the cream `H` monogram on the ink tile
+(the nav avatar's mark). Replace that file to use your own icon.
 
 ## Fonts
 

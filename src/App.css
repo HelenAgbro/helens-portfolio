@@ -135,9 +135,6 @@
   height: 13px;
 }
 
-.nav-links a.nav-cv:hover {
-  transform: translateY(-2px);
-}
 
 .nav-right {
   display: flex;
@@ -321,9 +318,6 @@
   transition: transform 0.25s ease;
 }
 
-.btn-discuss:hover {
-  transform: translateY(-2px);
-}
 
 .btn-discuss svg {
   width: 18px;
@@ -1184,9 +1178,6 @@
   transition: transform 0.25s ease;
 }
 
-.plan-cta:hover {
-  transform: translateY(-2px);
-}
 
 .plan-cta svg {
   width: 16px;
@@ -1541,10 +1532,6 @@
   transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
-.contact-submit:hover {
-  border-color: transparent;
-  transform: translateY(-2px);
-}
 
 .contact-submit svg {
   width: 16px;
@@ -1607,12 +1594,12 @@
 }
 
 /* =========================================================================
-   Glowing buttons — the ink pill holds a glowing substance that starts
-   flowing on hover: the theme's three accent hues (periwinkle, bubblegum,
-   mint) swirl inside the pill, a soft sheen slides across it and a halo
-   blooms around it. Both layers sit *behind* the label (negative z-index
-   inside the button's own stacking context), so the text never washes out,
-   and everything is clipped to the pill by overflow: hidden.
+   Button hover — modelled on the inspiration site (fubara.framer.website).
+   There the "Discuss a project" pill is a glossy dark bevel whose background
+   simply lightens from rgb(8, 8, 8) to rgb(54, 54, 54) on hover — no gradient,
+   no second colour, no movement. We keep that, add one accent-coloured halo
+   (so it still reads as a glow) and let a single pass of white light slide
+   through the pill.
    ========================================================================= */
 
 .btn-discuss,
@@ -1622,41 +1609,15 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  background-color: var(--btn-bg);
+  box-shadow: var(--btn-shadow);
   transition:
-    transform 0.25s ease,
-    box-shadow 0.35s ease,
-    border-color 0.25s ease;
+    background-color 0.22s ease,
+    box-shadow 0.3s ease,
+    border-color 0.22s ease;
 }
 
-/* The flowing substance */
-.btn-discuss::before,
-.nav-links a.nav-cv::before,
-.plan-cta::before,
-.contact-submit::before {
-  content: "";
-  position: absolute;
-  inset: -160%;
-  z-index: -1;
-  border-radius: 50%;
-  /* Ink veil over the swirl keeps the label readable on every hue */
-  background:
-    linear-gradient(rgba(12, 8, 22, 0.42), rgba(12, 8, 22, 0.42)),
-    conic-gradient(
-      from 0deg,
-      var(--glow-1),
-      var(--glow-2),
-      var(--glow-3),
-      var(--glow-2),
-      var(--glow-1)
-    );
-  filter: blur(7px) saturate(1.2);
-  opacity: 0;
-  transition: opacity 0.35s ease;
-  animation: glow-swirl 7s linear infinite;
-  animation-play-state: paused;
-}
-
-/* A streak of light that slides through the glow */
+/* One pass of light through the pill (colourless) */
 .btn-discuss::after,
 .nav-links a.nav-cv::after,
 .plan-cta::after,
@@ -1671,23 +1632,27 @@
   background: linear-gradient(
     100deg,
     transparent,
-    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3),
     transparent
   );
   transform: translateX(-160%) skewX(-18deg);
   opacity: 0;
+  pointer-events: none;
 }
 
-.btn-discuss:hover::before,
-.btn-discuss:focus-visible::before,
-.nav-links a.nav-cv:hover::before,
-.nav-links a.nav-cv:focus-visible::before,
-.plan-cta:hover::before,
-.plan-cta:focus-visible::before,
-.contact-submit:hover::before,
-.contact-submit:focus-visible::before {
-  opacity: 1;
-  animation-play-state: running;
+/* Hover: lighten the pill (8,8,8 → 54,54,54 on the inspiration) + halo */
+.btn-discuss:hover,
+.btn-discuss:focus-visible,
+.nav-links a.nav-cv:hover,
+.nav-links a.nav-cv:focus-visible,
+.plan-cta:hover,
+.plan-cta:focus-visible,
+.contact-submit:hover,
+.contact-submit:focus-visible {
+  background-color: var(--btn-hover);
+  box-shadow:
+    var(--btn-shadow),
+    0 0 28px -10px var(--glow-halo);
 }
 
 .btn-discuss:hover::after,
@@ -1699,48 +1664,26 @@
 .contact-submit:hover::after,
 .contact-submit:focus-visible::after {
   opacity: 1;
-  animation: glow-sheen 2.4s ease-in-out infinite;
-}
-
-/* The bloom around the pill */
-.btn-discuss:hover,
-.btn-discuss:focus-visible,
-.nav-links a.nav-cv:hover,
-.nav-links a.nav-cv:focus-visible,
-.plan-cta:hover,
-.plan-cta:focus-visible,
-.contact-submit:hover,
-.contact-submit:focus-visible {
-  box-shadow:
-    0 0 0 1px var(--glow-3) inset,
-    0 10px 26px -14px var(--glow-2),
-    0 0 30px -6px var(--glow-halo);
-}
-
-@keyframes glow-swirl {
-  to {
-    transform: rotate(1turn);
-  }
+  animation: glow-sheen 1.6s ease-in-out;
 }
 
 @keyframes glow-sheen {
-  0% {
+  from {
     transform: translateX(-160%) skewX(-18deg);
   }
 
-  60%,
-  100% {
+  to {
     transform: translateX(360%) skewX(-18deg);
   }
 }
 
-/* Round chip on the giant "Contact" word picks up the same bloom */
+/* Round chip on the giant "Contact" word picks up the same single hue */
 .contact-link:hover .contact-arrow,
 .contact-link:focus-visible .contact-arrow {
+  background-color: var(--btn-hover);
   box-shadow:
-    0 0 0 1px var(--glow-3) inset,
-    0 10px 26px -12px var(--glow-2),
-    0 0 34px -6px var(--glow-halo);
+    var(--btn-shadow),
+    0 0 30px -8px var(--glow-halo);
 }
 
 /* Outline pills (filter tabs, social links) get a gentle halo rather than
@@ -2017,11 +1960,7 @@
     animation: none;
   }
 
-  /* The button glow is motion; keep the readable hover state only */
-  .btn-discuss::before,
-  .nav-links a.nav-cv::before,
-  .plan-cta::before,
-  .contact-submit::before,
+  /* The light sweep is motion; the hover colour/shadow stays */
   .btn-discuss::after,
   .nav-links a.nav-cv::after,
   .plan-cta::after,
