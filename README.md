@@ -66,16 +66,16 @@ skills, testimonial and project entries.
   CTA particles and the giant CONTACT word are shared across all three
   views, mirroring the inspiration site.
 - Colours and shared sizes live in `:root` variables in `src/index.css`
-  (see **Themes, glow and the cursor eyes** below).
+  (see **Light / dark, button hover and the cursor eyes** below).
 
-## Themes, glow and the cursor eyes
+## Light / dark, button hover and the cursor eyes
 
-Three themes ship with the site, switched from the palette pill in the nav
-(next to the clock): **Paper** (the warm cream default), **Blossom** (soft
-rose) and **Dusk** (night). The choice is saved to `localStorage`
-(`helen-portfolio-theme`) and applied to `<html data-theme="…">` by a tiny
-inline script in `index.html` before the first paint, so there is no flash;
-first-time visitors get Dusk automatically when their OS is in dark mode.
+Two themes ship with the site, toggled by the **sun/moon button** in the nav
+(next to the clock): **Paper** (warm cream, the default) and **Dusk** (night).
+The choice is saved to `localStorage` (`helen-portfolio-theme`) and applied to
+`<html data-theme="…">` by a tiny inline script in `index.html` before the
+first paint, so there is no flash; first-time visitors get Dusk automatically
+when their OS is in dark mode.
 
 Every colour the page paints is a token in `src/index.css`:
 
@@ -85,14 +85,12 @@ Every colour the page paints is a token in `src/index.css`:
 | `--ink`, `--muted`, `--ghost` | text, dim text, faint text |
 | `--line`, `--line-strong`, `--border`, `--dots` | dashed rules, hover borders, dot grid |
 | `--chip`, `--track` | skill chips, testimonial progress track |
-| `--btn-bg`, `--btn-ink`, `--btn-border` | the ink pills (CTA, CV, plan, submit) |
+| `--btn-bg`, `--btn-hover`, `--btn-ink`, `--btn-border`, `--btn-shadow` | the ink pills (CTA, CV, plan, submit) |
 | `--accent`, `--accent-deep` | bright accent, and the readable version for text |
-| `--glow-1/2/3`, `--glow-halo`, `--glow-warm-1/2` | the whimsical glow trio |
+| `--glow-1/2/3`, `--glow-halo`, `--glow-warm-1/2` | the whimsical palette |
 
-The accent trio is periwinkle (`--glow-1`), bubblegum (`--glow-2`) and mint
-(`--glow-3`). Add a theme by copying a `[data-theme="…"]` block in
-`src/index.css` and listing it in the `themes` array in `src/App.jsx` (the
-array also holds the swatch colours the menu previews).
+Add a theme by copying a `[data-theme="…"]` block in `src/index.css` and
+adding its id to the `themes` list in `src/App.jsx`.
 
 **Button hover** — measured off the inspiration site: its "Discuss a project"
 pill is a glossy dark bevel whose background simply lightens from

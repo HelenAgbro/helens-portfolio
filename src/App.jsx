@@ -250,15 +250,12 @@ const socials = [
   { label: "Behance", url: "https://www.behance.net/helenagbro01" },
 ];
 
-/* ---- Themes (the palette pill in the nav) -------------------------------
-   Each entry is the id written to <html data-theme="…"> plus the swatch
-   colours previewed in the menu. The actual palette lives in
-   src/index.css as a matching [data-theme="…"] block — add one there and
-   list it here to add another theme. */
+/* ---- Themes (the sun/moon button in the nav) ----------------------------
+   Two ids only: "paper" is the light theme, "dusk" the dark one. Each is a
+   [data-theme="…"] block in src/index.css — the id here must match it. */
 const themes = [
-  { id: "paper", label: "Paper", swatch: "#f2f1ec", accent: "#7c5cff" },
-  { id: "blossom", label: "Blossom", swatch: "#fdf1f7", accent: "#e0399b" },
-  { id: "dusk", label: "Dusk", swatch: "#14111f", accent: "#b79cff" },
+  { id: "paper", label: "Light" },
+  { id: "dusk", label: "Dark" },
 ];
 
 const THEME_KEY = "helen-portfolio-theme";
@@ -622,23 +619,6 @@ function ArrowIcon() {
   );
 }
 
-/* Chevron used by the theme pill */
-function CaretIcon() {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  );
-}
-
 /* @@NEXT1@@ */
 
 /* =========================================================================
@@ -721,81 +701,57 @@ function useTheme() {
   return [theme, setTheme];
 }
 
-/* ---- Theme switcher: palette pill + popover menu of the three themes ---- */
-function ThemeSwitcher({ theme, onChange }) {
-  const [open, setOpen] = useState(false);
-  const wrapRef = useRef(null);
-  const active = themes.find((item) => item.id === theme) || themes[0];
+/* ---- Light / dark toggle -----------------------------------------------
+   One icon button: a moon while the light theme is on (click for dark) and
+   a sun in dark mode (click back to light). */
+function MoonIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+    </svg>
+  );
+}
 
-  /* Close on outside click or Escape */
-  useEffect(() => {
-    if (!open) return;
+function SunIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4" />
+    </svg>
+  );
+}
 
-    const onPointerDown = (event) => {
-      if (!wrapRef.current?.contains(event.target)) setOpen(false);
-    };
-    const onKeyDown = (event) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
+function ThemeToggle({ theme, onChange }) {
+  const dark = theme === "dusk";
+  const label = dark ? "Switch to light mode" : "Switch to dark mode";
 
   return (
-    <div className="theme-switch" ref={wrapRef}>
-      <button
-        type="button"
-        className="theme-toggle"
-        aria-expanded={open}
-        aria-haspopup="true"
-        aria-label={`Theme: ${active.label}. Choose a theme.`}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <span className="theme-toggle-dot" aria-hidden="true" />
-        <span className="theme-toggle-label">{active.label}</span>
-        <CaretIcon />
-      </button>
-
-      {open && (
-        <div className="theme-menu" role="menu" aria-label="Choose a theme">
-          {themes.map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              role="menuitemradio"
-              aria-checked={item.id === theme}
-              className={
-                item.id === theme ? "theme-option is-active" : "theme-option"
-              }
-              onClick={() => {
-                onChange(item.id);
-                setOpen(false);
-              }}
-            >
-              <span
-                className="theme-swatch"
-                aria-hidden="true"
-                style={{
-                  background: item.swatch,
-                  boxShadow: `0 0 0 1px ${item.accent} inset, 0 0 10px -3px ${item.accent}`,
-                }}
-              />
-              {item.label}
-              {item.id === theme && (
-                <span className="theme-check" aria-hidden="true">
-                  ✓
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
+    <button
+      type="button"
+      className="theme-toggle"
+      onClick={() => onChange(dark ? "paper" : "dusk")}
+      aria-label={label}
+      aria-pressed={dark}
+      title={label}
+    >
+      {dark ? <SunIcon /> : <MoonIcon />}
+    </button>
   );
 }
 
@@ -981,7 +937,7 @@ function Nav({ current = "home", theme, onThemeChange }) {
       </nav>
 
       <div className="nav-right">
-        <ThemeSwitcher theme={theme} onChange={onThemeChange} />
+        <ThemeToggle theme={theme} onChange={onThemeChange} />
         <Clock />
         <button
           type="button"

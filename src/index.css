@@ -43,11 +43,10 @@
 }
 
 /* ---- Theme tokens -------------------------------------------------------
-   Three themes, switched from the palette button in the nav (the theme id
+   Light and dark, toggled by the sun/moon button in the nav (the theme id
    lives on <html data-theme="…">, so one attribute re-skins the page):
-     paper   — the warm cream default
-     blossom — a soft rose afternoon
-     dusk    — the night version
+     paper — the warm cream light theme (default)
+     dusk  — the night theme
    Every colour below is themeable; nothing in App.css hard-codes a page
    colour any more. The last block is the whimsical accent trio — periwinkle,
    bubblegum and mint — used for the glow that flows through the buttons and
@@ -141,41 +140,6 @@
   --glow-halo: rgba(124, 92, 255, 0.45);
   --glow-warm-1: rgba(214, 204, 255, 0.95);
   --glow-warm-2: rgba(255, 186, 232, 0.85);
-}
-
-/* Blossom — dusty rose paper, plum ink, candy glow */
-:root[data-theme='blossom'] {
-  color-scheme: light;
-  --bg: #fdf1f7;
-  --surface: #fff8fb;
-  --ink: #2b1524;
-  --muted: #7f6076;
-  --border: #f2dbe7;
-  --line: #f0d5e3;
-  --line-strong: #e6bcd2;
-  --chip: #fbe3ef;
-  --ghost: #cfa4bd;
-  --field: #fdeaf3;
-  --nav-bg: rgba(253, 241, 247, 0.9);
-  --dots: rgba(43, 21, 36, 0.14);
-  --ink-dim: rgba(43, 21, 36, 0.22);
-  --ink-fade: rgba(43, 21, 36, 0.15);
-  --track: rgba(43, 21, 36, 0.12);
-  --shadow: rgba(80, 24, 60, 0.25);
-  --btn-bg: #2b1524;
-  --btn-ink: #fff8fb;
-  --btn-border: #4a2b3e;
-  --btn-hover: #4a2b3e;
-  --flag-bg: #ffd0e9;
-  --flag-ink: #2b1524;
-  --accent: #e0399b;
-  --accent-deep: #bc2380;
-  --glow-1: #ff5fb0;
-  --glow-2: #ffb26b;
-  --glow-3: #a98bff;
-  --glow-halo: rgba(224, 57, 155, 0.42);
-  --glow-warm-1: rgba(255, 214, 236, 0.95);
-  --glow-warm-2: rgba(255, 196, 150, 0.8);
 }
 
 /* Dusk — night mode */
