@@ -1338,7 +1338,9 @@ function Footer() {
       <nav className="footer-links">
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        {/* #/contact opens the Contact page (the hash router), while #contact
+            would only scroll to the giant "Contact" word on this page */}
+        <a href="#/contact">Contact</a>
       </nav>
       <a href="#top" className="to-top">
         Back to top ↑
