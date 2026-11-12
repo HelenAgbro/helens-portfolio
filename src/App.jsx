@@ -193,7 +193,7 @@ const services = [
   {
     name: "Website Design",
     tagline: "A quick, sharp website for your business",
-    price: "$1000",
+    price: "$500",
     per: "/website",
     featured: false,
     features: [
@@ -206,7 +206,7 @@ const services = [
   {
     name: "Product Design",
     tagline: "For a full product design overhaul",
-    price: "$3000",
+    price: "$2000",
     per: "/project",
     featured: true,
     features: [
