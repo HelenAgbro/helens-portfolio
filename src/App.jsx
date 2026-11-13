@@ -42,7 +42,6 @@ const site = {
   name: "Helen Agbro",
   role: "Product Designer",
   headline: "I turn complicated products into ones people understand.",
-  headlineMuted: "clear, useful products.",
   email: "helenagbro1@gmail.com",
 };
 
@@ -69,11 +68,11 @@ const skills = [
   "AI-Assisted Design",
 ];
 
-/* ---- Sidebar "Kind words" slider (✏️ add your real quotes here) ----
-   The card shows one entry at a time and cycles through the list; the bar
-   on its top edge has one segment per entry and fills for the active one.
-   Optional: import a photo and a company logo from src/assets and set them
-   as `avatar` / `logo` — they render as the overlapping avatar pair. */
+/* ---- Sidebar "Kind words" slider ---------------------------------------
+   One entry per quote: quote, author (name), role, company (optional) and
+   optional avatar / logo images imported from src/assets, which render as
+   the overlapping avatar pair. Entries marked `placeholder: true` stay in
+   this file as a template but are filtered out of the live slider. */
 const testimonials = [
   {
     quote:
@@ -123,11 +122,23 @@ const testimonials = [
     avatar: "",
     logo: "",
   },
+  {
+    /* Template for a client or colleague quote. Fill in the fields, then
+       delete the `placeholder: true` line to publish it. Press and hold or
+       click the card to move through the quotes. */
+    placeholder: true,
+    quote: "[PLACEHOLDER] Paste the client or colleague quote here.",
+    author: "[PLACEHOLDER] Name",
+    role: "[PLACEHOLDER] Role",
+    company: "[PLACEHOLDER] Company",
+    avatar: "",
+    logo: "",
+  },
 ];
 
 /* ---- About page (shown when you click "About" in the header) ---- */
 const aboutIntro =
-  "Product Designer with experience designing web and mobile products end to end, from research and wireframing through high-fidelity delivery and developer handoff. My work spans SaaS dashboards, messaging and collaboration tools, marketplaces and AI-powered products — alongside branding and illustration. I lead design independently, mentor junior designers, and work directly with engineering and product teams in agile environments, using AI-assisted tools like Claude, ChatGPT and Lovable to move faster from idea to prototype.";
+  "I design products that make complicated things feel simple. Most of my work is in collaboration tools, marketplaces and AI products, where the hard part is rarely a single screen. It is keeping the whole experience clear as it grows. I lead design at Stackchase, teach product design on Saturdays, and use AI tools to get ideas in front of people faster.";
 
 /* Each role has a `details` list — it opens in a dropdown when the row is
    clicked. ✏️ Edit these bullets to match what you want to show. */
@@ -189,47 +200,18 @@ const experience = [
   },
 ];
 
-const services = [
-  {
-    name: "Website Design",
-    tagline: "A quick, sharp website for your business",
-    price: "$500",
-    per: "/website",
-    featured: false,
-    features: [
-      "1 custom landing page",
-      "Up to 3 revisions included",
-      "Full UX audit",
-      "Access to free design resources",
-    ],
-  },
-  {
-    name: "Product Design",
-    tagline: "For a full product design overhaul",
-    price: "$2000",
-    per: "/project",
-    featured: true,
-    features: [
-      "Full-scale product design",
-      "End-to-end product UI design",
-      "Dedicated weekly strategy sessions",
-      "Personalized design library",
-    ],
-  },
-];
-
 const faqs = [
   {
     q: "What is your typical turnaround time?",
-    a: "Most landing pages ship in 2–3 weeks. Larger product work is scoped into weekly sprints after our first call, so you see progress every week.",
+    a: "It depends on scope. A small marketing site usually takes 2 to 3 weeks, and larger product work is planned in weekly sprints after our first call, so you see progress every week.",
   },
   {
     q: "Can you work with my existing brand guidelines?",
-    a: "Absolutely — I can design strictly within your existing system, or help evolve it in the places where it falls short.",
+    a: "Absolutely. I can design strictly within your existing system, or help evolve it where it falls short.",
   },
   {
     q: "Do you offer revisions?",
-    a: "Yes. Every package includes revision rounds — the exact number is listed on each plan, and extra rounds can be added anytime.",
+    a: "Yes. Revision rounds are part of every project, and we agree the number up front so there are no surprises.",
   },
   {
     q: "How do you handle communication?",
@@ -237,7 +219,7 @@ const faqs = [
   },
   {
     q: "Can you help with both web and app design?",
-    a: "Yes — responsive websites, web apps and native app interfaces are all part of my day-to-day work.",
+    a: "Yes. Responsive websites, web apps and native app interfaces are all part of my day to day work.",
   },
   {
     q: "What do you need from me to get started?",
@@ -296,44 +278,36 @@ const projects = [
     image: rationImage,
     external: "",
     year: "2024", /* ✏️ add the year if you want it in the case-study header */
-    role: "Lead Product Designer",
+    /* Role is shown in the Overview section of this case study */
+    role: "",
     /* ✏️ add the tools you used (e.g. "Figma, FigJam") to show them here */
     tools: "Figma, FigJam",
     focus: "Design System, Web & Mobile, Multi-module UX",
     overview:
       "Ration is an all-in-one digital workspace that helps organisations manage their communication, collaboration and everyday work from a single platform. As Lead Product Designer at Stackchase, I led the end-to-end redesign and expansion of Ration — evaluating the previous interface, creating a new design system, and taking UX, UI, prototyping and user testing through to developer handoff.",
-    highlights: [
-      "Redesigned the product around one consistent application structure",
-      "Designed nine modules — Mail, Chat, Meetings, Calendar, Contacts, Drive, Forms, Notes and Tasks",
-      "Built a reusable design system that keeps every module consistent",
-      "Prototyped and user-tested with internal teams and existing users",
-      "Desktop experiences shipped, with mobile Mail, Chat and Contacts already live",
+    overviewMeta: [
+      { label: "Role", value: "Lead Product Designer" },
+      { label: "Team", value: "[PLACEHOLDER] Who you worked with, for example 1 PM, 4 engineers and 1 QA" },
+      { label: "Timeline", value: "[PLACEHOLDER] How long the redesign took, for example 6 months" },
     ],
     sections: [
       {
-        heading: "The Challenge",
-        text: "The central challenge was designing multiple productivity tools that served different purposes while making them feel like parts of the same application. Each module had its own functionality, content structure and user interactions, and users should not feel as though they were moving between entirely different applications. Three considerations guided the work: consistency across modules, simplicity and usability, and scalability — a foundation that could support more modules without compromising the experience.",
+        heading: "Problem",
+        text: "[PLACEHOLDER] Two or three sentences on the problem Ration had to solve and why it mattered.",
       },
       {
-        heading: "My Design Process",
-        text: "I approached the project in stages, starting with understanding the existing product before moving into the redesign and implementation process.",
+        heading: "Process and key decisions",
+        text: "[PLACEHOLDER] The stages you went through, and the two or three decisions that shaped the outcome.",
         image: rationProcess,
       },
       {
-        heading: "Designing the Ration Ecosystem",
-        text: "One of the defining aspects of this project was designing multiple productivity tools under a shared application structure. I designed nine major modules, each serving a different organisational need: Ration Mail, Chat, Meetings, Calendar, Contacts, Drive, Forms, Notes and Tasks.",
-      },
-      {
-        heading: "My Role",
-        text: "As the Lead Product Designer I was the sole designer on the team when the redesign began, working closely with the Product Manager who provided the product requirements and feature specifications. My responsibility was to translate those into functional, intuitive and visually consistent product experiences — owning the process from evaluating the previous product to preparing designs for implementation.",
-      },
-      {
-        heading: "The Outcome",
-        text: "Ration is now a live product, with organisations using the platform to support communication and collaboration among their employees. The redesign delivered a consistent application structure, nine product modules, a reusable design system, interactive prototypes tested with internal team members and existing users, desktop experiences taken through development and released, and mobile applications with Mail, Chat and Contacts already live.",
-      },
-      {
-        heading: "Reflection and Learnings",
-        text: "Ration gave me the opportunity to approach product design at an ecosystem level rather than focusing on a single feature or application. The biggest takeaway was the importance of designing for consistency without sacrificing functionality — a shared design foundation makes an entire ecosystem easier to understand and use. I also learned to think beyond the design file: collaborating with developers, testing prototypes with existing users and reviewing implementations were all essential to delivering the intended experience.",
+        heading: "Outcome",
+        bullets: [
+          "Designed 200+ screens across web and mobile",
+          "Shared design system reduced component creation time by an estimated 30%",
+          "Team shipped 90% of planned sprint features on time",
+          "Weekly stakeholder updates reduced follow-up questions by 40%",
+        ],
       },
     ],
     gallery: [
@@ -373,6 +347,7 @@ const projects = [
     to: "#8a6f4e",
     logoTone: "dark",
     image: reclaimImage,
+    imageFit: "contain",
     external: "",
     year: "2026",
     tools: "Figma, Adobe Illustrator",
@@ -469,6 +444,7 @@ const projects = [
     to: "#cfe0cd",
     logoTone: "dark",
     image: easyMigrateImage,
+    imageFit: "contain",
     external: "",
     year: "2025",
     tools: "Figma, FigJam",
@@ -507,6 +483,7 @@ const projects = [
     to: "#1a365d",
     logoTone: "light",
     image: homeworkAiImage,
+    imageFit: "contain",
     external: "",
     year: "2026",
     tools: "Figma, FigJam",
@@ -526,6 +503,7 @@ const projects = [
     to: "#2c3e8f",
     logoTone: "light",
     image: stormImage,
+    imageFit: "contain",
     external: "",
     year: "2026",
     tools: "Figma",
@@ -960,18 +938,53 @@ function Nav({ current = "home", theme, onThemeChange }) {
         next quote blurs in. Click it (or press Enter/Space) to skip ahead. ---- */
 const SLIDE_MS = 7000;
 
+/* One quote block, shared by the visible slide and the hidden measuring
+   copies below it. */
+function QuoteBody({ item }) {
+  /* The second avatar circle shows the company logo, so fall back to the
+     company initial from the role line when there is no logo image. */
+  const company =
+    item.company ||
+    (item.role.includes(",")
+      ? item.role.split(",").slice(1).join(",").trim()
+      : item.role);
+  const byline = [item.role, item.company].filter(Boolean).join(", ");
+
+  return (
+    <>
+      <blockquote className="quote">
+        <span className="quote-dots" aria-hidden="true">
+          ...
+        </span>{" "}
+        {item.quote}
+      </blockquote>
+      <figcaption className="quote-author">
+        <span className="avatar-stack">
+          <span className="t-avatar">
+            {item.avatar ? <img src={item.avatar} alt="" /> : item.author.charAt(0)}
+          </span>
+          <span className="t-avatar">
+            {item.logo ? <img src={item.logo} alt="" /> : company.charAt(0)}
+          </span>
+        </span>
+        <span className="author-text">
+          <strong>{item.author}</strong>
+          <span className="author-role">{byline}</span>
+        </span>
+      </figcaption>
+    </>
+  );
+}
+
 function TestimonialSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const heldRef = useRef(false);
   const holdTimer = useRef(null);
-  const count = testimonials.length;
-  const item = testimonials[index];
-  /* The second avatar circle is the author's company logo, so fall back to
-     the initial of the company part of the role line. */
-  const company = item.role.includes(",")
-    ? item.role.split(",").slice(1).join(",").trim()
-    : item.role;
+  /* Placeholder entries are templates for you to fill in, never rendered */
+  const entries = testimonials.filter((entry) => !entry.placeholder);
+  const count = entries.length;
+  const item = entries[index % count];
   const next = () => setIndex((i) => (i + 1) % count);
 
   return (
@@ -979,7 +992,7 @@ function TestimonialSlider() {
       className="testimonial-card"
       role="button"
       tabIndex={0}
-      aria-label={`Testimonial ${index + 1} of ${count}. Click for the next one, or press and hold to pause.`}
+      aria-label={`Testimonial ${(index % count) + 1} of ${count}. Click for the next one, or press and hold to pause.`}
       onPointerDown={() => {
         heldRef.current = false;
         holdTimer.current = window.setTimeout(() => {
@@ -996,7 +1009,7 @@ function TestimonialSlider() {
         setPaused(false);
       }}
       onClick={() => {
-        /* A press-and-hold pauses so the quote can be read — don't also
+        /* A press-and-hold pauses so the quote can be read, don't also
            skip to the next one when the press is released. */
         if (heldRef.current) {
           heldRef.current = false;
@@ -1012,7 +1025,7 @@ function TestimonialSlider() {
       }}
     >
       <span className="t-bar" aria-hidden="true">
-        {testimonials.map((entry, i) => (
+        {entries.map((entry, i) => (
           <span
             key={`${i}-${entry.author}`}
             className={
@@ -1037,48 +1050,31 @@ function TestimonialSlider() {
         ))}
       </span>
 
-      <div className="t-slide" key={index} aria-live="polite">
-        <blockquote className="quote">
-          <span className="quote-dots" aria-hidden="true">
-            ...
-          </span>{" "}
-          {item.quote}
-        </blockquote>
-        <figcaption className="quote-author">
-          <span className="avatar-stack">
-            <span className="t-avatar">
-              {item.avatar ? (
-                <img src={item.avatar} alt="" />
-              ) : (
-                item.author.charAt(0)
-              )}
-            </span>
-            <span className="t-avatar">
-              {item.logo ? <img src={item.logo} alt="" /> : company.charAt(0)}
-            </span>
-          </span>
-          <span className="author-text">
-            <strong>{item.author}</strong>
-            <span className="author-role">{item.role}</span>
-          </span>
-        </figcaption>
+      <div className="t-body">
+        <div className="t-slide" key={index} aria-live="polite">
+          <QuoteBody item={item} />
+        </div>
+        {/* Hidden copies of every quote: the grid takes the height of the
+            longest one, so no quote is cut off and the card never jumps */}
+        <div className="t-sizer" aria-hidden="true">
+          {entries.map((entry) => (
+            <div key={`size-${entry.author}`}>
+              <QuoteBody item={entry} />
+            </div>
+          ))}
+        </div>
       </div>
     </figure>
   );
 }
 
-/* ---- Sticky left column: intro, skills marquee, testimonial slider ---- */
 function Sidebar() {
-  const half = Math.ceil(skills.length / 2);
-  const rowA = skills.slice(0, half);
-  const rowB = skills.slice(half).length ? skills.slice(half) : rowA;
-
   return (
     <aside id="about" className="sidebar">
       <div className="side-block">
         <span className="role-pill">{site.role}</span>
         <h1 className="headline">
-          {site.headline} <span className="muted">{site.headlineMuted}</span>
+          {site.headline}
         </h1>
         <div className="cta-wrap">
           <span className="cta-particles" aria-hidden="true">
@@ -1091,7 +1087,7 @@ function Sidebar() {
             <i />
           </span>
           <a className="btn-discuss" href={`mailto:${site.email}`}>
-            Discuss a project
+            Get in touch
             <ChatIcon />
           </a>
         </div>
@@ -1100,44 +1096,13 @@ function Sidebar() {
 
       <div className="side-block side-block-dots">
         <p className="side-label">Skills</p>
-        <div className="skills-marquee">
-          <div className="skills-row">
-            <div className="skills-track">
-              <div className="skills-set">
-                {rowA.map((skill) => (
-                  <span className="skill-chip" key={skill}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-              <div className="skills-set" aria-hidden="true">
-                {rowA.map((skill) => (
-                  <span className="skill-chip" key={skill}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="skills-row">
-            <div className="skills-track reverse">
-              <div className="skills-set">
-                {rowB.map((skill) => (
-                  <span className="skill-chip" key={skill}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-              <div className="skills-set" aria-hidden="true">
-                {rowB.map((skill) => (
-                  <span className="skill-chip" key={skill}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
+        <ul className="skills-marquee">
+          {skills.map((skill) => (
+            <li className="skill-chip" key={skill}>
+              {skill}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="side-block side-block-plain">
@@ -1184,6 +1149,7 @@ function ProjectCard({ project, index }) {
               className="card-media-img"
               src={project.image}
               alt={`${project.client} — ${project.title}`}
+              style={project.imageFit ? { objectFit: project.imageFit } : undefined}
             />
           ) : (
             <span className={`card-logo ${tone}`}>{project.client}</span>
@@ -1205,7 +1171,7 @@ function ProjectCard({ project, index }) {
 }
 
 function Projects() {
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("Product Design");
   const shown =
     filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
@@ -1350,6 +1316,17 @@ function ProjectDetail({ project }) {
       <h2 className="case-heading">Overview</h2>
       <p className="case-overview">{project.overview}</p>
 
+      {project.overviewMeta && (
+        <div className="case-meta">
+          {project.overviewMeta.map((row) => (
+            <div key={row.label}>
+              <span className="side-label">{row.label}</span>
+              <p className="case-meta-value">{row.value}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
       {(project.highlights || []).length > 0 && (
         <section className="case-section">
           <h2>Key Highlights</h2>
@@ -1395,7 +1372,14 @@ function ProjectDetail({ project }) {
       {(project.sections || []).map((section) => (
         <section key={section.heading} className="case-section">
           <h2>{section.heading}</h2>
-          <p>{section.text}</p>
+          {section.text && <p>{section.text}</p>}
+          {section.bullets && (
+            <ul className="case-highlights">
+              {section.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          )}
           {section.image && (
             <img
               className="case-section-img"
@@ -1497,47 +1481,11 @@ function Experience() {
   );
 }
 
-function Services() {
-  return (
-    <section className="about-block">
-      <h2 className="about-heading">
-        Your vision, my design — plans that work for you.
-      </h2>
-      <div className="plans-grid">
-        {services.map((plan) => (
-          <article key={plan.name} className="plan-card">
-            {plan.featured && <span className="plan-flag">Most popular</span>}
-            <div>
-              <h3 className="plan-name">{plan.name}</h3>
-              <p className="plan-tagline">{plan.tagline}</p>
-            </div>
-            <p className="plan-price">
-              {plan.price} <span>{plan.per}</span>
-            </p>
-            <ul className="plan-features">
-              {plan.features.map((feature) => (
-                <li key={feature}>{feature}</li>
-              ))}
-            </ul>
-            <a
-              className="plan-cta"
-              href={`mailto:${site.email}?subject=${encodeURIComponent(plan.name)}`}
-            >
-              Contact me
-              <ArrowIcon />
-            </a>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Faq() {
   return (
     <section className="about-block">
       <h2 className="about-heading">
-        Everything you need to know before we start
+        How I work, and what to expect
       </h2>
       <div className="faq-list">
         {faqs.map((item) => (
@@ -1559,7 +1507,6 @@ function About() {
     <section className="about">
       <AboutIntro />
       <Experience />
-      <Services />
       <Faq />
     </section>
   );
@@ -1689,7 +1636,7 @@ export default function App() {
           ? `Contact — ${site.name}`
           : view === "project" && project
             ? `${project.title} — ${site.name}`
-            : `${site.name} — Product Designer`;
+            : "Helen Agbro | Product Designer";
 
     if (view !== "home") {
       window.scrollTo({ top: 0, behavior: "instant" });

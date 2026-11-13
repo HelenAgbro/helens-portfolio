@@ -204,6 +204,12 @@
   width: 0;
 }
 
+/* Blocks keep their natural height: the sidebar scrolls instead of
+   squashing the testimonial */
+.side-block {
+  flex: none;
+}
+
 .side-block + .side-block {
   margin-top: 1.25rem;
   padding-top: 1.25rem;
@@ -366,40 +372,12 @@
   color: var(--muted);
 }
 
-/* Skills — two marquee rows scrolling in opposite directions,
-   like the inspiration's "Skills Top Stack / Bottom Stack" */
+/* Skills: the chips wrap onto as many lines as they need, so no chip is
+   ever clipped at the edge of the column */
 .skills-marquee {
-  display: grid;
-  gap: 0.5rem;
-  overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
-}
-
-.skills-row {
-  overflow: hidden;
-}
-
-.skills-track {
   display: flex;
-  width: max-content;
-  animation: marquee 18s linear infinite;
-}
-
-.skills-track.reverse {
-  animation-duration: 24s;
-  animation-direction: reverse;
-}
-
-/* Pausing while reading */
-.skills-marquee:hover .skills-track {
-  animation-play-state: paused;
-}
-
-.skills-set {
-  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .skill-chip {
@@ -409,12 +387,6 @@
   background: var(--chip);
   font-size: 0.9rem;
   white-space: nowrap;
-}
-
-@keyframes marquee {
-  to {
-    transform: translateX(-50%);
-  }
 }
 
 /* "Kind words" slider — no panel and no borders: the quote sits directly on
@@ -478,6 +450,11 @@
 }
 
 /* One slide at a time — the next quote slides in from the right */
+.t-body {
+  display: grid;
+  width: 100%;
+}
+
 .t-slide {
   display: flex;
   flex-direction: column;
@@ -485,6 +462,24 @@
   gap: 2rem;
   width: 100%;
   animation: t-slide-in 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* The visible slide and the hidden copies share one grid cell, so the card
+   is always as tall as the longest quote */
+.t-slide,
+.t-sizer {
+  grid-area: 1 / 1;
+  width: 100%;
+}
+
+.t-sizer {
+  display: grid;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.t-sizer > div {
+  grid-area: 1 / 1;
 }
 
 @keyframes t-slide-in {
@@ -695,7 +690,12 @@
   gap: 1rem;
   padding: 3.5rem 1.25rem 1.15rem;
   color: #fff;
-  background: linear-gradient(to top, rgba(12, 10, 8, 0.78), rgba(12, 10, 8, 0));
+  background: linear-gradient(
+    to top,
+    rgba(12, 10, 8, 0.94) 0%,
+    rgba(12, 10, 8, 0.8) 42%,
+    rgba(12, 10, 8, 0) 100%
+  );
 }
 
 /* Project name (large) with its descriptor underneath — the card reads
@@ -706,12 +706,14 @@
   font-weight: 400;
   letter-spacing: -0.04em;
   line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(12, 10, 8, 0.5);
 }
 
 .card-client {
   display: block;
   font-size: 0.85rem;
-  opacity: 0.85;
+  opacity: 0.9;
+  text-shadow: 0 1px 2px rgba(12, 10, 8, 0.5);
 }
 
 /* Arrow chip slides in on hover */
@@ -1868,7 +1870,6 @@
   .btn-discuss,
   .cta-particles i,
   .plan-cta,
-  .skills-track,
   .projects-tab,
   .contact-glow,
   .contact-arrow,
