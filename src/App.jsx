@@ -278,36 +278,44 @@ const projects = [
     image: rationImage,
     external: "",
     year: "2024", /* ✏️ add the year if you want it in the case-study header */
-    /* Role is shown in the Overview section of this case study */
-    role: "",
+    role: "Lead Product Designer",
     /* ✏️ add the tools you used (e.g. "Figma, FigJam") to show them here */
     tools: "Figma, FigJam",
     focus: "Design System, Web & Mobile, Multi-module UX",
     overview:
       "Ration is an all-in-one digital workspace that helps organisations manage their communication, collaboration and everyday work from a single platform. As Lead Product Designer at Stackchase, I led the end-to-end redesign and expansion of Ration — evaluating the previous interface, creating a new design system, and taking UX, UI, prototyping and user testing through to developer handoff.",
-    overviewMeta: [
-      { label: "Role", value: "Lead Product Designer" },
-      { label: "Team", value: "[PLACEHOLDER] Who you worked with, for example 1 PM, 4 engineers and 1 QA" },
-      { label: "Timeline", value: "[PLACEHOLDER] How long the redesign took, for example 6 months" },
+    highlights: [
+      "Redesigned the product around one consistent application structure",
+      "Designed nine modules — Mail, Chat, Meetings, Calendar, Contacts, Drive, Forms, Notes and Tasks",
+      "Built a reusable design system that keeps every module consistent",
+      "Prototyped and user-tested with internal teams and existing users",
+      "Desktop experiences shipped, with mobile Mail, Chat and Contacts already live",
     ],
     sections: [
       {
-        heading: "Problem",
-        text: "[PLACEHOLDER] Two or three sentences on the problem Ration had to solve and why it mattered.",
+        heading: "The Challenge",
+        text: "The central challenge was designing multiple productivity tools that served different purposes while making them feel like parts of the same application. Each module had its own functionality, content structure and user interactions, and users should not feel as though they were moving between entirely different applications. Three considerations guided the work: consistency across modules, simplicity and usability, and scalability — a foundation that could support more modules without compromising the experience.",
       },
       {
-        heading: "Process and key decisions",
-        text: "[PLACEHOLDER] The stages you went through, and the two or three decisions that shaped the outcome.",
+        heading: "My Design Process",
+        text: "I approached the project in stages, starting with understanding the existing product before moving into the redesign and implementation process.",
         image: rationProcess,
       },
       {
-        heading: "Outcome",
-        bullets: [
-          "Designed 200+ screens across web and mobile",
-          "Shared design system reduced component creation time by an estimated 30%",
-          "Team shipped 90% of planned sprint features on time",
-          "Weekly stakeholder updates reduced follow-up questions by 40%",
-        ],
+        heading: "Designing the Ration Ecosystem",
+        text: "One of the defining aspects of this project was designing multiple productivity tools under a shared application structure. I designed nine major modules, each serving a different organisational need: Ration Mail, Chat, Meetings, Calendar, Contacts, Drive, Forms, Notes and Tasks.",
+      },
+      {
+        heading: "My Role",
+        text: "As the Lead Product Designer I was the sole designer on the team when the redesign began, working closely with the Product Manager who provided the product requirements and feature specifications. My responsibility was to translate those into functional, intuitive and visually consistent product experiences — owning the process from evaluating the previous product to preparing designs for implementation.",
+      },
+      {
+        heading: "The Outcome",
+        text: "Ration is now a live product, with organisations using the platform to support communication and collaboration among their employees. The redesign delivered a consistent application structure, nine product modules, a reusable design system, interactive prototypes tested with internal team members and existing users, desktop experiences taken through development and released, and mobile applications with Mail, Chat and Contacts already live.",
+      },
+      {
+        heading: "Reflection and Learnings",
+        text: "Ration gave me the opportunity to approach product design at an ecosystem level rather than focusing on a single feature or application. The biggest takeaway was the importance of designing for consistency without sacrificing functionality — a shared design foundation makes an entire ecosystem easier to understand and use. I also learned to think beyond the design file: collaborating with developers, testing prototypes with existing users and reviewing implementations were all essential to delivering the intended experience.",
       },
     ],
     gallery: [
@@ -1316,17 +1324,6 @@ function ProjectDetail({ project }) {
       <h2 className="case-heading">Overview</h2>
       <p className="case-overview">{project.overview}</p>
 
-      {project.overviewMeta && (
-        <div className="case-meta">
-          {project.overviewMeta.map((row) => (
-            <div key={row.label}>
-              <span className="side-label">{row.label}</span>
-              <p className="case-meta-value">{row.value}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
       {(project.highlights || []).length > 0 && (
         <section className="case-section">
           <h2>Key Highlights</h2>
@@ -1372,14 +1369,7 @@ function ProjectDetail({ project }) {
       {(project.sections || []).map((section) => (
         <section key={section.heading} className="case-section">
           <h2>{section.heading}</h2>
-          {section.text && <p>{section.text}</p>}
-          {section.bullets && (
-            <ul className="case-highlights">
-              {section.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
-              ))}
-            </ul>
-          )}
+          <p>{section.text}</p>
           {section.image && (
             <img
               className="case-section-img"
