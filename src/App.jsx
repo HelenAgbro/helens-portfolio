@@ -46,26 +46,22 @@ const site = {
 };
 
 const skills = [
+  "Product Design",
   "UX/UI Design",
-  "Interaction Design",
-  "Visual Design",
   "Design Systems",
-  "Wireframing & Prototyping",
   "UX Research",
   "Usability Testing",
-  "Accessibility",
-  "Branding",
-  "Illustration",
-  "Payment & Checkout Design",
-  "Dashboard & Data Viz",
-  "Agile/Sprint",
+  "Interaction Design",
+  "Wireframing & Prototyping",
+  "AI Product Design",
+  "AI-Assisted Prototyping (Claude Code, Lovable)",
+  "Front-End Prototyping (HTML, CSS, JavaScript)",
+  "Accessibility & Responsive Design",
   "Developer Handoff",
-  "Mentoring & Coaching",
+  "Visual Design",
   "Figma",
   "Adobe Illustrator",
-  "HTML & CSS",
-  "Notion",
-  "AI-Assisted Design",
+  "Branding & Illustration",
 ];
 
 /* ---- Sidebar "Kind words" slider ---------------------------------------
@@ -312,6 +308,12 @@ const projects = [
       {
         heading: "The Outcome",
         text: "Ration is now a live product, with organisations using the platform to support communication and collaboration among their employees. The redesign delivered a consistent application structure, nine product modules, a reusable design system, interactive prototypes tested with internal team members and existing users, desktop experiences taken through development and released, and mobile applications with Mail, Chat and Contacts already live.",
+        bullets: [
+          "Designed 200+ screens across web and mobile",
+          "Shared design system reduced component creation time by an estimated 30%",
+          "Team shipped 90% of planned sprint features on time",
+          "Weekly stakeholder updates reduced follow-up questions by 40%",
+        ],
       },
       {
         heading: "Reflection and Learnings",
@@ -1370,6 +1372,13 @@ function ProjectDetail({ project }) {
         <section key={section.heading} className="case-section">
           <h2>{section.heading}</h2>
           <p>{section.text}</p>
+          {section.bullets && (
+            <ul className="case-highlights">
+              {section.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          )}
           {section.image && (
             <img
               className="case-section-img"

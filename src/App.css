@@ -382,11 +382,14 @@
 
 .skill-chip {
   flex: none;
+  /* the longest chips wrap inside the pill instead of being clipped */
+  max-width: 100%;
   padding: 0.4rem 1rem;
   border-radius: 999px;
   background: var(--chip);
   font-size: 0.9rem;
-  white-space: nowrap;
+  line-height: 1.35;
+  white-space: normal;
 }
 
 /* "Kind words" slider — no panel and no borders: the quote sits directly on
